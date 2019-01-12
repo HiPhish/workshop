@@ -1,0 +1,10 @@
+p.backlink {
+	text-align: center;
+}
+
+canvas {
+	border: 1px solid;
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 2em;
+}
