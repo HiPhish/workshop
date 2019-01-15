@@ -50,7 +50,7 @@
 
 (define (enter? path stat result skip-directories)
   "Only enter a directory if it is not the path of a blog."
-  (not (member path skip-directories)))
+  (not (member (string-append path "/") skip-directories)))
 
 (define (leaf path stat result output-dir content-dir)
   (define extension  ; File extension with leading dot stripped

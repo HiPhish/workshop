@@ -34,12 +34,13 @@ list."
   (define title     (assq-ref data 'title    ))
   (define menu-bar  (assq-ref data 'menu-bar ))
   (define css       (assq-ref data 'css      ))
+  (define style     (assq-ref data 'style    ))
   (define footer    (assq-ref data 'footer   ))
   (define content   (assq-ref data 'content  ))
 
   (define new-content
     `(html (@ (lang "en"))
-       ,(head-snippet #:title title #:css css)
+       ,(head-snippet #:title title #:css css #:style style)
        (body
          (h1 "HTML-page body")
          (header
@@ -93,7 +94,7 @@ list."
 
   (acons 'content new-content data))
 
-(define* (head-snippet #:key (title #f) (css #f) (js '()))
+(define* (head-snippet #:key (title #f) (css #f) (style #f) (js '()))
   "Produce the `head` part of the base page. Returns one SXML expression (which
    may of course contain sub-expressions), not a list of SXML expressions."
   `(head
@@ -126,6 +127,9 @@ list."
 		                   (type "text/css")
 		                   (media "all"))))
            (if css css '()))
+     ;; Extra style information embedded into the page
+     ,(map (λ (style) `(style ,style))
+           (if style style '()))
      ;; jQuery (necessary for Bootstrap's JavaScript plugins) -->
      (script (@ (src "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"))
        "")

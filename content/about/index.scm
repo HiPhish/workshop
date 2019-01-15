@@ -93,7 +93,7 @@
     (h3 "Source code")
     (p
       "The Scheme source code for the workshop is available in a "
-      (a (@ (href "https://gitlab.com/HiPhish/workshop"))
+      (a (@ (href "https://github.com/HiPhish/workshop"))
         "public repo")
       ". If anything on the website is not working, please file an issue.")
     (h3 (@ (id "content-license"))

@@ -7,7 +7,7 @@
 (define-module (content grid-framework examples index)
   #:export (make-example-page))
 
-(define (make-example-page title id . body)
+(define (make-example-page title id description . body)
   "Build the entire web page for one of the example pages. This function
 generates the metadata and the content, so the module using this only has to
 call this one function."
@@ -19,41 +19,42 @@ call this one function."
 
   (define content
     `(;; Assets built by Unity for the HTML5 player
-      (link (@ (href "Release/example.datagz")))
-      (link (@ (href "Release/example.jsgz")))
-      (link (@ (href "Release/example.asm.jsgz")))
-      (link (@ (href "Release/example.memgz")))
+      (link (@ (href "example.datagz")))
+      (link (@ (href "example.jsgz")))
+      (link (@ (href "example.asm.jsgz")))
+      (link (@ (href "example.memgz")))
       (p (@ (class "backlink"))
         (a (@ (href ,(string-append "../#" id)))
           "Grid Framework examples")
         " | "
         (strong ,title))
-      ,@body
+      ,description
       (canvas (@ (id "canvas")
                  (oncontextmenu "event.preventDefault()")
                  (height "450")
                  (width "600"))
         "")
+      ,@body
       (script (@ (src "../example.js")
                  (type "text/javascript"))
         "")
-      (script (@ (src "Release/UnityLoader.js"))
+      (script (@ (src "UnityLoader.js"))
         "")))
   (acons 'content content metadata))
 
 (define (example->sxml title url video content)
   "Build a list of SXML expressions of an example to splice into the content
 tree."
-  `(,(if video
-       `(iframe (@ (title "YouTube video player")
-                   (src   ,video)
-                   (class "pull-right"))
-          "")
-       '())
-    (h1 (@ (id ,url))
+  `((h1 (@ (id ,url))
       (a (@ (href ,(string-append url "/")))
         ,title))
-    ,@content))
+    ,(if video 
+       `(div (@ (class "example"))
+          (iframe (@ (title "YouTube video player")
+                     (src   ,video))
+            "")
+          (div ,@content))
+       content)))
 
 (define example-titles
   '("Moving along a grid"
@@ -87,63 +88,13 @@ tree."
         converting the result back to world space. As an extra touch we can
         limit the hero to only stay within the bounds of the grid size. We
         need this because grids are infinitely large, so the sphere could
-        wander off into infinity.")
-     (p "This example demonstrates one of the simplest and most common uses for
-        Grid Framework: converting between coordinate systems. We take the
-        object's current position, convert is to grid space, add a direction to
-        it, convert the result back to world space and use that as the
-        destination of our movement function.")
-     (div (@ (class "highlight"))
-       (pre "var goal = grid.WorldToGrid(transform.position)
-goal += Vector3.right;
-transform.position = grid.GridToWorld(goal);"))
-     (p "This alone is not that interesting, so let's limit the player to the
-         visible region of the grid. Every grid is infinitely large, but the "
-        (em "renderer")
-        " has a range we can use as limits before converting back
-        to world coordinates:")
-     (div (@ (class "highlight"))
-       (pre "if (goal.x < _renderer.From.x || goal.x > _renderer.To.x)
-    return;
-if (goal.y < _renderer.From.y || goal.y > _renderer.To.y)
-    return;"))
-     (p "As a final touch, let's use Grid Framework to store the map of the
-        game.  It will know which tiles are OK to walk on and which ones are
-        obstacles.  We will use a 2D array to keep track of the game; each
-        entry's row and column corresponds to the tile's X- and Y coordinates
-        in the grid.")
-     (div (@ (class "highlight"))
-       (pre "// After checking for range, before converting to world coordinates
-if (!FreeTile(_goal)) {
-    return;
-}
-
-// Building the matrix
-var rows    = Mathf.FloorToInt(_renderer.To.x);
-var columns = Mathf.FloorToInt(_renderer.To.y);
-
-_tiles = new bool[rows, columns];
-
-// Checking a tile (grid coordinates)
-var r = Mathf.FloorToInt(tile.x);
-var c = Mathf.FloorToInt(tile.y);
-return _tiles[r, c];")))
+        wander off into infinity."))
 
     ((p "Here we learn how write a simple puzzle game where the goal is to turn
         all the lights off and every time you click a light that light and the
         four adjacent ones flip their state. No light knows anything about its
         surrounding lights, making this game very flexible, you can have all
-        sorts of crazy shapes and holes in it.")
-     (p "The core of this example is comparing the grid coordinates of the
-        tiles to the one tile that was clicked to decide whether to switch
-        colour. The logic is nicely encapsulated in a custom extension method,
-        making it appear as if has always been part of Grid Framework.")
-     (div (@ (class "highlight"))
-       (pre "if(theGrid.IsAdjacent(transform.position, switchPosition)){
-    //flip the state of this switch
-    isOn = !isOn;}"))
-     (p "This extension method is not part of Grid Framework's API, but we can
-        use it as if it were."))
+        sorts of crazy shapes and holes in it."))
 
     ((p "In this example we create a bubble puzzle field from an array by
         placing objects on the grid according to the position inside the array.
@@ -153,12 +104,7 @@ return _tiles[r, c];")))
         players to add their own levels. Instead of having a separate scene for
         each level we only need one scene, we can build new levels without
         having to worry about carrying the background or music from scene to
-        scene, allowing for seamless transition.")
-     (p "The core of this example is the position of a entries in the array,
-        i.e.  the row and column.  We use these array coordinates as grid
-        coordinates and convert them to world coordinates.")
-     (div (@ (class "highlight"))
-       (pre "Vector3 targetPosition = levelGrid.GridToWorld(new Vector3(column, row, 0));")))
+        scene, allowing for seamless transition."))
 
     ((p "If you want to allow the user to place object only on the grid, then
         this example is for you.  Snapping is a two-step process: first we move
