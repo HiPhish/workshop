@@ -32,17 +32,17 @@ Required metadata:
   (define blog       (assq-ref data 'blog))
   (define categories (assq-ref data 'categories))
 
-  (define bread
+  (define breadcrumbs
     `(((title . ,(assq-ref blog 'top))
        (url   . "../"))
       ((title . "categories"))))
   (define content
     `((ul
         ,@(map category->sxml categories))))
-  (define metadata `((content . ,content)
-                     (title   . "Categories")
-                     (url     . "categories")
-                     (bread   . ,bread)))
+  (define metadata `((content     . ,content)
+                     (title       . "Categories")
+                     (url         . "categories")
+                     (breadcrumbs . ,breadcrumbs)))
   (append metadata data))
 
 (define (category->sxml category)

@@ -40,7 +40,7 @@ More lesser periods (e.g. the month) can be given, but they are optional."
   (define month    (assq-ref data 'month))
   (define posts    (assq-ref data 'posts))
 
-  (define bread
+  (define breadcrumbs
     (cond
       (month `(((title . ,(assq-ref blog 'top))
                 (url   . "../../"))
@@ -54,6 +54,6 @@ More lesser periods (e.g. the month) can be given, but they are optional."
     `((ul
         ,@(articles-list posts #:relative-to (if month "../../" "../")))))
 
-  (append `((bread   . ,bread)
-            (content . ,content))
+  (append `((breadcrumbs . ,breadcrumbs)
+            (content     . ,content))
           data))

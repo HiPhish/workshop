@@ -29,7 +29,7 @@
   (define category (assq-ref data 'category))
   (define posts    (assq-ref data 'posts))
 
-  (define bread
+  (define breadcrumbs
     `(((title . ,(assq-ref blog 'top))
        (url   . "../../"))
       ((title . "categories")
@@ -38,6 +38,6 @@
   (define content
     `((ul
         ,@(articles-list posts #:relative-to "../../"))))
-  (define metadata `((bread   . ,bread)
-                     (content . ,content)))
+  (define metadata `((breadcrumbs . ,breadcrumbs)
+                     (content     . ,content)))
   (append metadata data))

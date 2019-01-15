@@ -44,12 +44,12 @@ Required metadata:
                 
   - tags        The same as categories, except for tags."
 
-  (define bread        (assq-ref data 'bread     ))
-  (define content      (assq-ref data 'content   ))
-  (define categories   (assq-ref data 'categories))
-  (define tags         (assq-ref data 'tags      ))
-  (define blog         (assq-ref data 'blog      ))
-  (define periods      (assq-ref data 'periods   ))
+  (define breadcrumbs (assq-ref data 'breadcrumbs))
+  (define content     (assq-ref data 'content    ))
+  (define categories  (assq-ref data 'categories ))
+  (define tags        (assq-ref data 'tags       ))
+  (define blog        (assq-ref data 'blog       ))
+  (define periods     (assq-ref data 'periods    ))
 
   (define blog-url (assq-ref blog 'url))
 
@@ -75,7 +75,7 @@ Required metadata:
      `((h1 "Blog")
          
        (section
-         ,(breadcrumbs bread)
+         ,(breadcrumbs->sxml breadcrumbs)
          ;; Article body, splice in content here
          ,@content)
 
@@ -128,7 +128,7 @@ Required metadata:
          (data (acons 'content new-content data)))
      (acons 'css (cons "/css/blog.css" (if css css '())) data)))
 
-(define (breadcrumbs items)
+(define (breadcrumbs->sxml items)
   "Generate a list of breadcrumbs for use within a blog. The nature of the
 breadcrumbs (caption, URL, activity) depends on the arguments. The result is a
 tree to be used directly, not spliced in.
@@ -146,8 +146,6 @@ The `items` is a list of alists. For each item a `title` is required and a
              ,title)
           title)))
 
-   `(nav (@ (class "blog-breadcrumbs")
-            (aria-label "Breadcrumbs"))
-      (h1 "Breadcrumbs navigation")
-      (ol (@ (class "breadcrumb"))
+   `(nav (@ (aria-label "Breadcrumbs"))
+      (ol (@ (class "breadcrumbs"))
         ,@(map item->sxml items))))

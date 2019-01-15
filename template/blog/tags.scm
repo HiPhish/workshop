@@ -32,17 +32,17 @@ Required metadata:
   (define blog       (assq-ref data 'blog))
   (define tags (assq-ref data 'tags))
 
-  (define bread
+  (define breadcrumbs
     `(((title . ,(assq-ref blog 'top))
        (url   . "../"))
       ((title . "tags"))))
   (define content
     `((ul
         ,@(map tag->sxml tags))))
-  (define metadata `((content . ,content)
-                     (bread   . ,bread)
-                     (title   . "Tags")
-                     (url     . "tags")))
+  (define metadata `((content     . ,content)
+                     (breadcrumbs . ,breadcrumbs)
+                     (title       . "Tags")
+                     (url         . "tags")))
   (append metadata data))
 
 (define (tag->sxml tag)

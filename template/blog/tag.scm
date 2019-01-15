@@ -34,7 +34,7 @@
   (define tag   (assq-ref data 'tag  ))
   (define posts (assq-ref data 'posts))
 
-  (define bread
+  (define breadcrumbs
     `(((title . ,(assq-ref blog 'top))
        (url   . "../../"))
       ((title . "tags")
@@ -45,6 +45,6 @@
    `((ul
        ,@(articles-list posts #:relative-to "../../"))))
 
-  (define metadata `((bread   . ,bread)
-                     (content . ,content)))
+  (define metadata `((breadcrumbs . ,breadcrumbs)
+                     (content     . ,content)))
   (append metadata data))

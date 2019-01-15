@@ -31,11 +31,11 @@ It displays all articles (paginated of course) from newest to oldest."
 
   (define blog (assq-ref data 'blog))
 
-  (define bread
+  (define breadcrumbs
     `(((title . ,(assq-ref blog 'top)))))
   (define content
     `((ul
         ,@(articles-list (assq-ref data 'posts)))))
 
   (acons 'content content
-         (acons 'bread bread data)))
+         (acons 'breadcrumbs breadcrumbs data)))

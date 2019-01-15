@@ -32,7 +32,7 @@ Required metadata.
   (define blog    (assq-ref data 'blog   ))
   (define periods (assq-ref data 'periods))
 
-  (define bread
+  (define breadcrumbs
     `(((title . ,(assq-ref blog 'top))
        (url   . "../"))
       ((title . "archive"))))
@@ -41,9 +41,9 @@ Required metadata.
     `((main(ul
         ,@(reverse! (map year->sxml periods))))))
 
-  (append `((bread   . ,bread)
-            (content . ,content)
-            (css     . ("/css/article_index.css")))
+  (append `((breadcrumbs . ,breadcrumbs)
+            (content     . ,content)
+            (css         . ("/css/article_index.css")))
           data))
 
 (define (year->sxml year)

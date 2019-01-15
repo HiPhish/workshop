@@ -46,13 +46,33 @@ body > section.container > section > nav > nav ul {
 }
 
 
-.blog-breadcrumbs > ol {
+/* ---[ Blog breadcrumbs ]-------------------------------------------------- */
+ol.breadcrumbs {
 	margin-bottom: 0;
+	padding: 0.5em 1em;
+	list-style: none;
+	background-color: #ecf0f1;
+	border-radius: 0.3em;
 }
 
-.blog-breadcrumbs > h1 {
-	display: none;
+ol.breadcrumbs > li {
+	display: inline-block;
+	color: #95a5a6;
 }
+ol.breadcrumbs > li:after {
+	content: "\00a0/\00a0";
+	padding: 0 0.25em;
+	color: #cccccc;
+}
+
+ol.breadcrumbs > li > a {
+	text-decoration: none;
+}
+ol.breadcrumbs > li > a:hover {
+	text-decoration: underline;
+}
+/* ------------------------------------------------------------------------- */
+
 
 /* ---[ Limit the width of elements in the post ]--------------------------- */
 

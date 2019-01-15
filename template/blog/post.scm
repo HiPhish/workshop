@@ -64,7 +64,7 @@ Optional metadata:
   ;; Breadcrumbs for blog navigation; clicking a date portion takes us to that
   ;; date period archive. This is flawed because it assumes that the period
   ;; granularity is always the same.
-  (define bread
+  (define breadcrumbs
     `(((title . ,(assq-ref blog 'top))
        (url   . "../../../.."))
       ((title . ,(date->string date "~Y"))
@@ -122,9 +122,9 @@ Optional metadata:
             '())))))
 
   (define metadata
-    `((content . ,new-content)
-      (bread   . ,bread)
-      (css     . ,css)))
+    `((content     . ,new-content)
+      (breadcrumbs . ,breadcrumbs)
+      (css         . ,css)))
   (append metadata data))
 
 (define (pager->sxml prev next)
