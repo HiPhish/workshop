@@ -106,7 +106,7 @@ result is a list to be spliced in."
           `(a (@ (href ,(cond
                           ((= 1 current-page) (format #f "./~A/" index))
                           ((= 1        index) "..")
-                          (else (format #f "../~A" index)))))
+                          (else (format #f "../~A/" index)))))
              ,(if label label (format #f "~A" index))))))
 
   ; (format #t "Page ~A/~A~%" current-page total-pages)

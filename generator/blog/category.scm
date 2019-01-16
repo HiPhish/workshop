@@ -54,7 +54,7 @@
         (generate-one-category-page
           (if (= 1 current-page)
             (format #f "~A/~Aindex.html" out-dir url)
-            (format #f "~A/~A~A/index.html" out-dir url page))
+            (format #f "~A/~A~A/index.html" out-dir url current-page))
           (acons 'page current-page
                  (acons 'pages page-count
                         (acons 'posts head data)))))))
