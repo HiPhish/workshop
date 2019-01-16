@@ -1,6 +1,5 @@
 title: Whitelisting subdirectories in Git
 tags: old-blog, how-to
-subsite: grid-framework
 ---
 
 After having migrated the development of Grid Framework to Git I wanted to set

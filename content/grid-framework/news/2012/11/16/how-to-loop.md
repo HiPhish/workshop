@@ -1,6 +1,5 @@
 title: How to loop through a list and remove items
 tags: old-blog, how-to
-subsite: grid-framework
 ---
 
 The other day I had the following problem: I had a list of `Transfom`s and I

@@ -1,6 +1,5 @@
 title: Grid movement and runtime snapping
 tags: old-blog, example
-subsite: grid-framework
 ---
 
 Well, I just sent my second submission. There are three examples included, one

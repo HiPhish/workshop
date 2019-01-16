@@ -1,7 +1,6 @@
 title: Hex Grids love Vectrosity
 tags: old-blog, extension
 category: progress
-subsite: grid-framework
 ---
 
 Good news at last, I just finished the finding functions for vertices, both in

@@ -1,7 +1,6 @@
 title: Release!
 tags: old-blog
 category: release
-subsite: grid-framework
 ---
 
 Grid Framework has been approved and is from now available on the Unity Asset

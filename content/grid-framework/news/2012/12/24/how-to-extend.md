@@ -1,7 +1,6 @@
 title: How to extend Grid Framework with your own methods
 category: tips
 tags: old-blog, extension
-subsite: grid-framework
 ---
 
 Let's say you just bought Grid Framework, wrote some game logic and now you

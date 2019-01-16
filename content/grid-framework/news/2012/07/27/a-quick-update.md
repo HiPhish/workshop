@@ -1,6 +1,5 @@
 title: A quick update
 tags: old-blog
-subsite: grid-framework
 ---
 
 I have been contacted by an Asset Store admin, who recommends me to include a

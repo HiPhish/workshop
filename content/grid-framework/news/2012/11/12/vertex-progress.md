@@ -1,7 +1,6 @@
 title: Vertex progress
 tags: old-blog
 category: progress
-subsite: grid-framework
 ---
 
 Good news at last, I just finished the finding functions for vertices, both in

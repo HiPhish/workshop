@@ -1,7 +1,6 @@
 title: A new inspector
 tags: old-blog
 category: progress
-subsite: grid-framework
 ---
 
 Well, I wanted to do this sooner or later anyway, so I made a custom editor for

@@ -1,7 +1,6 @@
 title: How about herring for lunch?
 tags: old-blog
 category: progress
-subsite: grid-framework
 ---
 
 Another progress update: `WorldToGrid` and `GridToWorld` are now implemented.

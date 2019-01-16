@@ -1,6 +1,5 @@
 title: Grid-based game logic
 tags: old-blog, example
-subsite: grid-framework
 ---
 
 Another video tutorial, showing how to use grid-based game logic in a puzzle

@@ -1,7 +1,6 @@
 title: The current roadblock
 tags: old-blog
 category: progress
-subsite: grid-framework
 ---
 
 It has been over a week since my last post, so I might as well explain what's

@@ -1,6 +1,5 @@
 title: Back again
 tags: old-blog
-subsite: grid-framework
 ---
 
 I just wanted to drop a line saying I'm back to work. As I mentioned previously

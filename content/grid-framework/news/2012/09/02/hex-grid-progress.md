@@ -1,7 +1,6 @@
 title: Hex grid progress so far
 tags: old-blog
 category: progress
-subsite: grid-framework
 ---
 
 Here's a quick status update:

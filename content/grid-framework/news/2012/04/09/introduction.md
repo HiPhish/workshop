@@ -1,6 +1,5 @@
 title: Introduction
 tags: old-blog
-subsite: grid-framework
 ---
 
 Hello everyone :)

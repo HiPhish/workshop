@@ -1,6 +1,5 @@
 title: Introduction video
 tags: old-blog
-subsite: grid-framework
 ---
 
 As promised, here it is:

@@ -1,6 +1,5 @@
 title: Hex Grid introduction video
 tags: old-blog, how-to
-subsite: grid-framework
 ---
 
 I made a short video giving you an overview of hex grids, so you can see them

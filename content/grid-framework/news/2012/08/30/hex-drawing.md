@@ -1,7 +1,6 @@
 title: Hex grid drawing - finally!
 tags: old-blog
 category: progress
-subsite: grid-framework
 ---
 
 I have finished the drawing part for hex grids. As I mentioned before, there

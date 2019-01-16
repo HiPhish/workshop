@@ -1,6 +1,5 @@
 title: Example video: Level Design and Text parsing in Unity3D
 tags: old-blog, example
-subsite: grid-framework
 ---
 
 I made another example video for Grid Framework, this time for the recently
