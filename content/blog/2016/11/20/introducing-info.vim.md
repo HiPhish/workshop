@@ -1,6 +1,6 @@
 title: Introducing info.vim
 tags: vim, info
-category: info.vim
+category: vim
 ---
 
 There is a new project up at the Workshop: [info.vim], a Vim plugin which

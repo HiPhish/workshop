@@ -75,6 +75,8 @@
                           (url   . "https://gitlab.com/HiPhish/info.vim"))
                          ((title . "REPL.nvim")
                           (url   . "https://gitlab.com/HiPhish/repl.nvim"))
+                         ((title . "Quicklisp.nvim")
+                          (url   . "https://gitlab.com/HiPhish/quicklisp.nvim"))
                          ((title . "jinja.vim")
                           (url   . "https://gitlab.com/HiPhish/jinja.vim")))))))
     (right . (((title . "Blog"   )
