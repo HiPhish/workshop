@@ -129,32 +129,33 @@ Optional metadata:
 
 (define (pager->sxml prev next)
   "Build the SXML tree for the pager of a blog post."
-  (define (item->sxml item class rel symbol next?)
+  (define (item->sxml item rel symbol next?)
     (define title (assq-ref item 'title))
     (define url   (assq-ref item 'url  ))
-    `(li (@ (class ,class))
-       (a (@ (href ,(format #f "../../../../~A" url))
-             (rel  ,rel))
-         ,@(if next?
-             `(,title
-               " "
-               (span (@ (aria-hidden "true"))
-                 ,symbol))
-             `((span (@ (aria-hidden "true"))
-                 ,symbol)
-               " "
-               ,title)))))
+    `(a (@ (href ,(format #f "../../../../~A" url))
+           (rel  ,rel)
+         (style ,(format #f "float: ~A" (if next? "right" "left"))))
+       ,@(if next?
+           `(,title
+             " "
+             (span (@ (aria-hidden "true"))
+               ,symbol))
+           `((span (@ (aria-hidden "true"))
+               ,symbol)
+             " "
+             ,title))))
 
-  `(footer
-     (hr)
+  `(footer (@ (class "blog-pager"))
      (nav
-       (ul (@ (class "pager"))
-          ,(if prev
-             (item->sxml prev "previous" "prev" "←" #f)
-             '())
-          ,(if next
-             (item->sxml next "next" "next" "→" #t)
-             '())))))
+       ,(if prev
+          (item->sxml prev "previous" "←" #f)
+          '(a (@ (style "display: none;")
+                 (hidden "hidden"))
+             ""))
+       ,(if next
+          (item->sxml next "next" "→" #t)
+          '(a (@ (style "display: none;"))
+             "")))))
 
 (define (tag->sxml tag)
   (define title (assq-ref tag 'title))
