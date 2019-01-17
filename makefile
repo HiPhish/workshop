@@ -23,12 +23,12 @@ LOCAL_URL = "http://localhost:8080"
 
 
 # ===[ Phony targets ]=========================================================
-.PHONY: local publish serve clean
+.PHONY: local publish serve help clean
 
 local:
 	@$(GUILE) -L . -e main -s workshop.scm --url $(LOCAL_URL)
 
-publish:
+publish: clean
 	@$(GUILE) -L . -e main -s workshop.scm --url $(PUBLISH_URL)
 
 serve: local
@@ -38,7 +38,7 @@ help:
 	@echo 'Usage: make (local|publish|serve|help|clean)'
 	@echo ''
 	@echo '  local    Build everything for local testing'
-	@echo '  publish  Build everything setup for publishing'
+	@echo '  publish  Clean up and build everything set up for publishing'
 	@echo '  serve    Run the local web server'
 	@echo '  help     Display this message'
 	@echo '  clean    Remove all build products'
