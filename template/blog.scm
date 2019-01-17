@@ -83,6 +83,17 @@ Required metadata:
        (nav (@ (class "well"))
          ;; This navigator contains links to the various archive types.
          (h1 "Blog navigation")
+         (aside
+           (strong "Subscribe:")
+           " "
+           (a (@ (href ,(string-append blog-url "rss.xml"))
+                 (type "application/rss+xml"))
+             "RSS")
+           ; ", "
+           ; (a (@ (href ,(string-append blog-url "atom.xml"))
+           ;       (type  "application/atom+xml"))
+           ;   "Atom")
+           )
          (nav
            (h1
              (a (@ (href ,(format #f "~Aarchive/" blog-url)))
@@ -109,19 +120,7 @@ Required metadata:
              (a (@ (href ,(string-append blog-url "tags/")))
                "Tags"))
            (ul
-             ,@(map tag->sxml tags)))
-         (aside
-           ;; TODO: Generate the feeds
-           (strong "Subscribe:")
-           " "
-           (a (@ (href ,(string-append blog-url "rss.xml"))
-                 (type "application/rss+xml"))
-             "RSS")
-           ; ", "
-           ; (a (@ (href ,(string-append blog-url "atom.xml"))
-           ;       (type  "application/atom+xml"))
-           ;   "Atom")
-           ))))
+             ,@(map tag->sxml tags))))))
 
    ;; Add the new extra CSS to the data as necessary, but first add the new content
    (let ((css (assq-ref data 'css))
