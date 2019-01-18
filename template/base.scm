@@ -42,7 +42,6 @@ list."
     `(html (@ (lang "en"))
        ,(head-snippet #:title title #:css css #:style style)
        (body
-         (h1 "HTML-page body")
          (header
            ;; Top navigation bar
            ,(main-navbar site-name menu-bar))
@@ -113,6 +112,10 @@ list."
               (media "all")))
      ;; My own style sheets
      (link (@ (rel "stylesheet")
+              (href "/css/main.css")
+              (type "text/css")
+              (media "all")))
+     (link (@ (rel "stylesheet")
               (href "/css/local-nav.css")
               (type "text/css")
               (media "all")))
@@ -145,70 +148,39 @@ list."
 
 (define (main-navbar home menu)
   "Generate the SXML tree of the main menu navigation bar"
+
   (define (menu-item->sxml item)
     (define title (assq-ref item 'title))
     (define url   (assq-ref item 'url  ))
-    (cond
-      ((list? item)
-       `(li (@ (class "dropdown"))
-          (a (@ (class "dropdown-toggle")
-                (href ,url)
-                (data-toggle "dropdown")
-                (role "button")
-                (aria-haspopup "true")
-                (aria-expanded "false"))
-            ,title)
-          (ul (@ (class "dropdown-menu"))
-            ,@(map (λ (sub-item)
-                      (cond
-                        ((null? sub-item)
-                         '(li (@ (class "divider")
-                                 (role "separator"))
-                            ""))
-                        (else
-                          `(li
-                             (a (@ (href ,(assq-ref sub-item 'url)))
-                               ,(assq-ref sub-item 'title))))))
-                   (assq-ref item 'items)))))
-      (else
-        `(li
-           (a (@ (href ,url))
-             ,(assq-ref item 'title))))))
+    (define items (assq-ref item 'items))
+    ;; If the li is empty it is a separator, so it needs to be hidden
+    `(li ,(if (or url items) '() '(@ (hidden "hidden")))
+       ,(if url
+          `(a (@ (href ,url)) ,title)
+          title)
+       ,(if items
+          `(ul
+             ,@(map menu-item->sxml items))
+          '())))
 
-  `(nav (@ (id "main-navbar")
-           (class "navbar navbar-default"))
-     (h1 "Site-wide navigation bar")
-     ;; Brand and toggle get grouped for better mobile display
-     (div (@ (class "container-fluid"))
-       (input (@ (type "checkbox")
-                 (value "")
-                 (name "navbar-toggle-cbox")
-                 (id "navbar-toggle-cbox")))
-       ;; Brand and toggle get grouped for better mobile display
-       (div (@ (class "navbar-header"))
-         (label (@ (for "navbar-toggle-cbox" )
-                   (class "navbar-toggle collapsed")
-                   (data-toggle "collapse")
-                   (data-target "#main-navbar-collapse")
-                   (aria-controls "navbar-toggle-cbox"))
-           (span (@ (class "sr-only")) "Toggle navigation")
-           (span (@ (class "icon-bar")) "")
-           (span (@ (class "icon-bar")) "")
-           (span (@ (class "icon-bar")) ""))
-         (a (@ (class "navbar-brand")
-               (href "/"))
-          ,home))
+  (define (push-end items)
+    "Push the first li of the list towards the end."
+    (define head (car items))
+    (cons `(li (@ (class "push-end"))
+              ,(cdr head))
+          (cdr items)))
 
-       ;; Collect the nav links, forms, and other content for toggling
-       (div (@ (class "collapse navbar-collapse")
-               (id "main-navbar-collapse"))
-         ;; The list of navbar items
-         (ul (@ (class "nav navbar-nav"))
-           ,@(map menu-item->sxml
-                  (assq-ref menu 'left)))
-         (ul (@ (class "nav navbar-nav navbar-right"))
-           ,@(map (λ (menu-item)
-                    `(li
-                       (a (@ (href ,(assq-ref menu-item 'url)))
-                         ,(assq-ref menu-item 'title))))
-                  (assq-ref menu 'right)))))))
+  `(nav (@ (id "main-navbar"))
+     ;; input and label work together for the hamburger hack
+     (input (@ (type "checkbox")
+               (id   "main-nav-hamburger")
+               (hidden "hidden")))
+     (div  ; Contains the header of the navbar
+       (a (@ (href "/"))
+         ,home)
+       (label (@ (for "main-nav-hamburger")
+                 (hidden "hidden"))
+         ""))
+     (ul
+       ,(map menu-item->sxml (assq-ref menu 'left))
+       ,(push-end (map menu-item->sxml (assq-ref menu 'right))))))

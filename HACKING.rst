@@ -103,3 +103,71 @@ as images) which get copied over verbatim, but other content is files which
 need to be *read* and processed instead. There is is usually a 1:1
 correspondence between a file and an HTML output, but it does not have to be so
 (e.g. the index of a blog is generated from many blog posts).
+
+
+Individual content elements
+###########################
+
+The global navigation menu
+==========================
+
+The menu at the top of every page is built entirely using HTML and CSS without
+any Javascript. It supports one level of nesting and has a hamburger toggle
+button for mobile devices based on the checkbox hack.
+
+.. code:: html
+   <nav id="main-navbar">
+     <input type="checkbox" id="hamburger" hidden="hidden">
+     <div>
+       <a href="/">Home page</a>
+       <label for="hamburger" hidden="hidden"></label>
+     </div>
+     <ul>
+       <li>
+         <a href="#">Group 1</a>
+         <ul>
+           <li><a href="#">Item 1</a></li>
+           <li hidden="hidden"></li>
+           <li><a href="#">Item 2</a></li>
+           <li><a href="#">Item 3</a></li>
+         </ul>
+       </li>
+       <li>
+         <a href="#">Item without group</a>
+       </li>
+       <li class="push-end">
+         <a href="#">This will be pushed right/down</a>
+       </li>
+
+There are three elements in the `nav`: a (hidden) checkbox, the `div`
+containing the home link and the (hidden) hamburger "button", and the list of
+actual navigation items. An item may contain a nested list. Empty and hidden
+list items are separators, they will be displayed using CSS, but must be hidden
+from non-graphical user agents.
+
+Here is the hack: When the screen gets small enough enough we hide the list and
+we show the hamburger button by setting its `display` CSS property to `block`
+or something, overriding how the browser interprets the `hidden` attribute. Due
+to `hidden` being an HTML attribute, the label will still remain hidden on
+other user agents, such as screen readers. Now when the user clicks the
+hamburger label, it sets the `:checked` pseudo-class of the checkbox, which
+allows us to override the `display` of the list.
+
+.. code:: css
+
+   nav#main-navbar > input#hamburger:checked ~ ul {
+       display: flex;
+   }
+
+The remainder of the CSS is just about making the whole thing pretty. There is
+a couple of improvements that could be made:
+
+- Allow toggling the menu items instead of hovering over them. This would
+  require a lot of radio button hackery to make the toggles work well
+- Allow toggling on mobile as well. Currently in mobile nesting is not
+  supported because it would require the ability to toggle instead of hover.
+  See the first point.
+- The checkbox requires an `id` attribute, which is an ugly hack. The standard
+  allows us to embed the input inside the label, but in order to select the
+  list based on a such nested checkbox we would need a sort of "cousin"
+  selector, which is not possible in CSS.
