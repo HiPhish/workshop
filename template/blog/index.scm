@@ -29,13 +29,12 @@
 The main index of the blog is what the user first sees when visiting the blog.
 It displays all articles (paginated of course) from newest to oldest."
 
-  (define blog (assq-ref data 'blog))
+  (define blog  (assq-ref data 'blog ))
+  (define posts (assq-ref data 'posts))
+  (define page  (assq-ref data 'page ))
 
-  (define breadcrumbs
-    `(((title . ,(assq-ref blog 'top)))))
-  (define content
-    `((ul
-        ,@(articles-list (assq-ref data 'posts)))))
+  (define breadcrumbs `(((title . ,(assq-ref blog 'top)))))
+  (define content (articles-list posts (if (= page 1) "" "../")))
 
   (acons 'content content
          (acons 'breadcrumbs breadcrumbs data)))

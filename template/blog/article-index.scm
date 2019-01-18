@@ -43,7 +43,8 @@ Required metadata:
   (define new-content
     `((h1 "Articles of the blog")
       (main
-        ,@content)
+        (ul
+          ,@content))
       ,(if (> pages 1)
          `(footer
             (nav (@ (class "paginator text-center"))
@@ -55,7 +56,7 @@ Required metadata:
   (acons 'content new-content
          (acons 'css css data)))
 
-(define* (articles-list posts #:key (relative-to ""))
+(define (articles-list posts relative-to)
   "Build the items for display in an article index. The result is a list of
 `li` elements to be spliced into an `ul` or `ol`."
 

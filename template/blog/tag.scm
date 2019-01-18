@@ -33,6 +33,7 @@
   (define blog  (assq-ref data 'blog ))
   (define tag   (assq-ref data 'tag  ))
   (define posts (assq-ref data 'posts))
+  (define page  (assq-ref data 'page ))
 
   (define breadcrumbs
     `(((title . ,(assq-ref blog 'top))
@@ -41,9 +42,7 @@
        (url   . "../"))
       ((title . ,(assq-ref tag 'title)))))
 
-  (define content
-   `((ul
-       ,@(articles-list posts #:relative-to "../../"))))
+  (define content (articles-list posts (if (= page 1) "../../" "../../../")))
 
   (define metadata `((breadcrumbs . ,breadcrumbs)
                      (content     . ,content)))

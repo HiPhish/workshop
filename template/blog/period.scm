@@ -51,8 +51,7 @@ More lesser periods (e.g. the month) can be given, but they are optional."
                (url   . "../"))
               ((title . ,year))))))
   (define content
-    `((ul
-        ,@(articles-list posts #:relative-to (if month "../../" "../")))))
+    (articles-list posts (if month "../../" "../")))
 
   (append `((breadcrumbs . ,breadcrumbs)
             (content     . ,content))
