@@ -149,8 +149,7 @@ Optional metadata:
      (nav
        ,(if prev
           (item->sxml prev "previous" "←" #f)
-          '(a (@ (style "display: none;")
-                 (hidden "hidden"))
+          '(a (@ (hidden "hidden"))
              ""))
        ,(if next
           (item->sxml next "next" "→" #t)
