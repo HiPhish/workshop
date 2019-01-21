@@ -355,7 +355,7 @@ Since the lag is less than `Δt` the `α` is between zero (inclusive) and one
 (exclusive). Another fun idea would have been to make the time increment of
 `real-time` random to simulate a fluctuating frame rate.
 
-In my opinion he functional version is somewhat harder to trace through, but
+In my opinion the functional version is somewhat harder to trace through, but
 the underlying idea is easier to see than in the imperative implementation. The
 functional nature of my implementation has allowed me to unravel the problem
 from inside-out; I started with the `simulate` function, then asked myself how
