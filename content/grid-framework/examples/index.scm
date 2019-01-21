@@ -14,7 +14,7 @@ call this one function."
   (define metadata
     `((title    . ,(string-append title " - Grid Framework"))
       (sub-site . grid-framework)
-      (css      . ("/css/web-player.css"))
+      (css      . ("../web-player.css"))
       (js       . ("/js/unity-webgl.js"))))
 
   (define content
@@ -174,4 +174,4 @@ renderer.To   += rangeShift;")))
 `((content  . ,content)
   (title    . "Examples - Grid Framework")
   (sub-site . grid-framework)
-  (css      . ("/css/grid-framework.css")))
+  (css      . ("../grid-framework.css")))

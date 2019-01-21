@@ -4,7 +4,7 @@
 (define metadata
   '((title    . "Grid Framework - HiPhish's Workshop")
     (sub-site . grid-framework)
-    (css      . ("/css/grid-framework.css"))))
+    (css      . ("grid-framework.css"))))
 
 (define content
   '((div (@ (class "jumbotron")

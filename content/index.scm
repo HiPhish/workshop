@@ -3,7 +3,7 @@
 
 (define metadata
   '((title . "HiPhish's Workshop - Home")
-    (css   . ("/css/product-cards.css"))))
+    (css   . ("index.css"))))
 
 (define (product->sxml title img alt url description)
   `(article

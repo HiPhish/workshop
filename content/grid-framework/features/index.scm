@@ -4,7 +4,7 @@
 (define metadata
   '((title    . "Features - Grid Framework") 
     (sub-site . grid-framework)
-    (css      . ("/css/grid-framework.css"))))
+    (css      . ("../grid-framework.css"))))
 
 (define (feature->sxml title first . rest)
   `(div (@ (class "col-md-6 foldout"))
