@@ -28,4 +28,5 @@
     (define content (assq-ref (template data) 'content))
     (call-with-output-file out-file
       (λ (out)
+        (display "<!DOCTYPE html>\n" out)
         (sxml->xml content out)))))
