@@ -37,6 +37,6 @@ Supported arguments
       (serve port)
       (serve))))
 
-(define* (serve #:optional (port 8080))
+(define* (serve #:optional (port 8080) (host "0.0.0.0"))
   "Run the local web server. Really just a wrapper around the Haunt server."
-  (haunt:serve "output" #:open-params `(#:port ,port)))
+  (haunt:serve "output" #:open-params `(#:port ,port #:host ,host)))
