@@ -25,7 +25,7 @@
     "Repl.nvim"
     "NTFS-Clone"
     "Newton's method in C"
-    "<code>roll</code> - Roll dice on the command line"
+    ((code "roll") " - Roll dice on the command line")
     "Game source documenation"
     "XeenTools"))
 
