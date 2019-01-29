@@ -51,8 +51,8 @@ list."
            ,@content)
          ;; Footer of the website
          (footer
-           (div (@ (class "container"))
-             (div (@ (class "col-md-8 footer-self"))
+           (div  ; This is a wrapper to limit the width
+             (div (@ (class "footer-self"))
                ,(let ((logo (assq-ref footer 'logo)))
                   (if (not logo)
                     ""
@@ -79,17 +79,17 @@ list."
                                " ")
                             "")
                          ,@note)))))
-             (div (@ (class "col-md-4 footer-social"))
-               (span (@ (class "pull-right"))
-                 ,@(map (λ (item)
-                          `(a (@ (href ,(assq-ref item 'url))
-                                 (title ,(assq-ref item 'title))
-                                 (target "blank"))
-                             (img (@ (class "img-circle")
-                                     (src   ,(assq-ref item 'image))
-                                     (alt   ,(assq-ref item 'title))))
-                             " "))
-                        (assq-ref footer 'social)))))))))
+             (div (@ (class "footer-social"))
+               ,@(map (λ (item)
+                        `(a (@ (href ,(assq-ref item 'url))
+                               (title ,(assq-ref item 'title))
+                               (target "blank"))
+                           (img (@ (class "img-circle")
+                                   (src   ,(assq-ref item 'image))
+                                   (alt   ,(assq-ref item 'title))))
+                           " "))
+                      (assq-ref footer 'social)))
+           )))))
 
   (acons 'content new-content data))
 
