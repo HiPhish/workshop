@@ -29,18 +29,18 @@
 (define (page data)
   "Base template for all pages, to be spliced into a web page."
 
-  (define title     (assq-ref data 'title))
-  (define sub-site  (assq-ref data 'sub-site))
+  (define title     (assq-ref data 'title    ))
+  (define sub-site  (assq-ref data 'sub-site ))
   (define sub-sites (assq-ref data 'sub-sites))
-  (define modified  (assq-ref data 'modified))
-  (define content   (assq-ref data 'content ))
+  (define modified  (assq-ref data 'modified ))
+  (define content   (assq-ref data 'content  ))
 
 
   (define new-content
     `(,(if sub-site
          (sub-site-navigation (assq-ref sub-sites sub-site))
-         "")
-      (section (@ (class "col-md-12 container"))
+         '())
+      (section
         ,@content)
       ,(if modified
          `(footer (@ (class "col-md-12"))
@@ -67,8 +67,7 @@
      (ul
        (li
          (a (@ (href ,url))
-           ,title
-           ))
+           ,title))
        ,@(map (λ (item)
                 (define title (assq-ref item 'title))
                 (define url   (assq-ref item 'url  ))

@@ -46,8 +46,7 @@ list."
          (header
            ;; Top navigation bar
            ,(main-navbar site-name menu-bar))
-         (section (@ (class "container"))
-           (h1 "Document body")
+         (section
            ;; -- insert sub-navigation here ---
            ,@content)
          ;; Footer of the website
@@ -106,11 +105,6 @@ list."
      (link (@ (rel "stylesheet")
               (href "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css")
               (crossorigin "anonymous")))
-     ;; Bootstrap customisation
-     (link (@ (rel "stylesheet" )
-              (href "/css/custom.css")
-              (type "text/css" )
-              (media "all")))
      ;; My own style sheets
      (link (@ (rel "stylesheet")
               (href "/css/main.css")

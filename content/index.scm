@@ -78,13 +78,13 @@
         well enough that a port could be built from the specifications
         alone."))
     ((p "An ongoing effort to write a library that can read assets from the "
-        (em "Might &amp; Magic IV and V")
+        (em "Might & Magic IV and V")
         " games. The idea is to write a library that can be used as a basis for
         a modern source port.")))
   )
 
 (define content
-  `((header (@ (class "jumbotron"))
+  `((div
       (h1 "Welcome to the workshop")
       (p "I make things, usually with software, and occasionally I write, usually
           about software as well. The workshop is home to my projects, both
