@@ -146,4 +146,5 @@
     (sub-sites . ,sub-sites)
     (menu-bar  . ,menu-bar )
     (footer    . ,footer   )
-    (blogs     . ,blogs    )))
+    (blogs     . ,blogs    )
+    (lang      . "en"      )))

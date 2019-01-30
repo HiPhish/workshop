@@ -36,10 +36,11 @@ list."
   (define css       (assq-ref data 'css      ))
   (define style     (assq-ref data 'style    ))
   (define footer    (assq-ref data 'footer   ))
+  (define lang      (assq-ref data 'lang     ))
   (define content   (assq-ref data 'content  ))
 
   (define new-content
-    `(html (@ (lang "en"))
+    `(html (@ (lang ,lang))
        ,(head-snippet #:title title #:css css #:style style)
        (body
          (header
