@@ -7,42 +7,36 @@
     (css      . ("grid-framework.css"))))
 
 (define content
-  '((div (@ (class "jumbotron")
-            (style "background-image: url('/img/greenboard.jpg')"))
-      (div (@ (class "row"))
-        (div (@ (class "col-md-8"))
-          (h1 "Grid Framework")
-          (p
-            "Code grid-based game logic in no time with Grid Framework, a
-            simple and versatile scripting add-on for the Unity3D game
-            engine."))
-        (div (@ (class "col-md-4"))
-          (img (@ (class "img-responsive")
-                  (src   "images/logo.png")
-                  (alt   "Grid Framework logo"))))))
-    (div (@ (class "well"))
-      (div (@ (class "row"))
-        (div (@ (class "col-md-4"))
-          (h3 "Flexible "
-              (span (@ (class "pull-right glyphicon glyphicon-wrench")) ""))
-          (p
-            "You don't write your project to fit Grid Framework, Grid
-             Framework fits your project. Use the scripting API in any way you
-             want, for any purpose you want. See the examples to get some ideas."))
-        (div (@ (class "col-md-4"))
-          (h3 "Ready to go " (span (@ (class "pull-right glyphicon glyphicon-book")) ""))
-          (p
-            "All you have to do is add a grid component to one of your objects
-             and you can start scripting. The included user manual, API
-             reference and included examples allow you to be productive in no
-             time."))
-        (div (@ (class "col-md-4"))
-          (h3 "Lightweight " (span (@ (class "pull-right glyphicon glyphicon-leaf")) ""))
-          (p
-            "Grids store only the absolute minimum of information necessary:
-             their spacing, their range and information on how to display. This
-             allows you to have infinitely large grids with minimal memory
-             footprint."))))
+  '((div (@ (class "billboard"))
+      (div
+        (h1 "Grid Framework")
+        (p
+          "Code grid-based game logic in no time with Grid Framework, a simple
+          and versatile scripting add-on for the Unity3D game
+          engine."))
+      (img (@ (src   "images/logo.png")
+              (alt   "Grid Framework logo"))))
+    (div (@ (class "highlights"))
+      (div 
+        (h3 "Flexible")
+        (p
+          "You don't write your project to fit Grid Framework, Grid
+           Framework fits your project. Use the scripting API in any way you
+           want, for any purpose you want. See the examples to get some ideas."))
+      (div 
+        (h3 "Ready to go")
+        (p
+          "All you have to do is add a grid component to one of your objects
+           and you can start scripting. The included user manual, API
+           reference and included examples allow you to be productive in no
+           time."))
+      (div 
+        (h3 "Lightweight")
+        (p
+          "Grids store only the absolute minimum of information necessary:
+           their spacing, their range and information on how to display. This
+           allows you to have infinitely large grids with minimal memory
+           footprint.")))
     (h2 "What is Grid Framework?")
     (p
       "Grid Framework is a powerful and easy to use solution for all your grid
