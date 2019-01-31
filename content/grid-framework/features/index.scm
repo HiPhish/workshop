@@ -27,15 +27,16 @@
          can add grids either using the editor or programmatically at runtime
          and modify its properties.")
       (div (@ (class "highlight"))
-        (pre "GameObject go;
-RectGrid grid = go.AddComponent<RectGrid>();
-// Add a renderer for display
-go.AddComponent<Parallelepiped>();
-
-// Set up the grid for 2:1 dimetric graphics
-grid.spacing  = new Vector3(2, 1, 1);
-grid.shearing = new Vector6(-1/2, 0, 2, 0, 0, 0);
-// Vector6 is a custom type, not part of the Unity API"))
+        (pre
+          "GameObject go;\n"
+          "RectGrid grid = go.AddComponent<RectGrid>();\n"
+          "// Add a renderer for display\n"
+          "go.AddComponent<Parallelepiped>()\n"
+          "\n"
+          "// Set up the grid for 2:1 dimetric graphics\n"
+          "grid.spacing  = new Vector3(2, 1, 1);\n"
+          "grid.shearing = new Vector6(-1/2, 0, 2, 0, 0, 0);\n"
+          "// Vector6 is a custom type, not part of the Unity API"))
       (p "All custom types reside in custom namespaces to protect from name
          collisions with your own types or possible future types from Unity. The
          namespace import was omitted for brevity.")
@@ -55,20 +56,21 @@ grid.shearing = new Vector6(-1/2, 0, 2, 0, 0, 0);
           another. If we know the grid coordinates we can compute the world
           coordinates and pass them to your movement function:")
       (div (@ (class "highlight"))
-         (pre "Vector3 origin      = grid.gridToWorld(originInGrid    );
-Vector3 destination = grid.gridToWorld(desinationInGrid);
-MoveUnit(from: origin, to: destination);
-"))
+         (pre
+           "Vector3 origin      = grid.gridToWorld(originInGrid    );\n"
+           "Vector3 destination = grid.gridToWorld(desinationInGrid);\n"
+           "MoveUnit(from: origin, to: destination);"))
       (p "A common task is snapping things to a grid, for example when the
          player is trying to place building in a strategy game. This is where
          the "
          (code "AlignTransform")
          " extension method comes into play:")
       (div (@ (class "highlight"))
-        (pre "Transform t;
-// Move the object the usual way with no snapping first
-// And then correct its position by snapping
-grid.AlignTransform(t);"))
+        (pre
+          "Transform t;\n"
+          "// Move the object the usual way with no snapping first\n"
+          "// And then correct its position by snapping\n"
+          "grid.AlignTransform(t);"))
       (p "Usually the "
          (code "AlignTransform")
          " method is smart enough to do what you want, but if you want more
@@ -89,7 +91,9 @@ grid.AlignTransform(t);"))
          (code "Transform")
          " component, like any other object in Unity.")
       (div (@ (class "highlight"))
-        (pre "// This works as you would expect\n Quaternion gridRotation = grid.transform.rotation;")))
+        (pre
+          "// This works as you would expect\n"
+          "Quaternion gridRotation = grid.transform.rotation;")))
      ("Small memory footprint"
        (p "Grid Framework was designed to keep it simple, to just be there when
           you need it but never intrude with the workflow. All calculation
@@ -113,10 +117,11 @@ grid.AlignTransform(t);"))
          to know that Grid Framework can compute points for use with the
          popular Vectrosity add-on.")
       (div (@ (class "highlight"))
-        (pre "// Set the rendering range and colour
-renderer.From   = new Vector3( 0,  0, 0);
-renderer.To     = new Vector3(10, 10, 5);
-renderer.ColorX = Color.black;")))
+        (pre
+          "// Set the rendering range and colour\n"
+          "renderer.From   = new Vector3( 0,  0, 0);\n"
+          "renderer.To     = new Vector3(10, 10, 5);\n"
+          "renderer.ColorX = Color.black;")))
      ("Vectrosity Support"
       (p "Vectrosity is a popular 3rd party vector line drawing solution for
           Unity. Instead of rendering lines point by point, Vectrosity can
@@ -133,8 +138,10 @@ renderer.ColorX = Color.black;")))
          ". Vectrosity and Grid Framework are entirely unrelated products and I
          am in no way affiliated with the author of Vectrosity.")
       (div (@ (class "highlight"))
-        (pre "// Grid Framework gets the points and then Vectrosity takes over
-gridLine = new Vectrosity.VectorLine(\"My lines\", grid.GetVectrosityPoints(), lineColors, lineMaterial, lineWidth);"))))
+        (pre
+          "// Grid Framework gets the points and then Vectrosity takes over\n"
+          "var points = grid.GetVectrosityPoints();\n"
+          "gridLine = new Vectrosity.VectorLine(\"My lines\", points, lineColors, lineMaterial, lineWidth);"))))
     (("Playmaker Support"
       (p "Grid Framwork also supports the popular "
          (a (@ (href "http://hutonggames.com/"))
