@@ -51,12 +51,13 @@
      (p "Here is a very rough sketch of what a grid class could look like;
         of course there is more to it in practice, but this gives you a good
         idea.")
-     (div (@ (class "highlight"))
-       (pre "// Origin and rotation are inherited from the GameObject
-class RectGrid : Grid {
-    public Vector3 spacing;
-    public Vector6 shearing;
-};"))
+     (pre
+       (code
+         "// Origin and rotation are inherited from the GameObject\n"
+         "class RectGrid : Grid {\n"
+         "    public Vector3 spacing;\n"
+         "    public Vector6 shearing;\n"
+         "};"))
      (p "This is what allows grids to be infinitely large in the game and very
         small in memory at the same time. All calculations are performed in
         constant time and cost the same regardless of where in the grid you
@@ -66,33 +67,33 @@ class RectGrid : Grid {
     ((p "Yes, UnityScript and C# get compiled to the same bytecode anyway.
         Grids are subclasses of Unity's  (code Component)  class and can be
         manipulated like any other component.")
-     (div (@ (class "highlight"))
-       (pre
-         "var grid : RectGrid = gameObject.GetComponent.<RectGrid>();
-grid.spacing = Vector3.one;")))
+     (pre
+       (code
+         "var grid : RectGrid = gameObject.GetComponent.<RectGrid>();\n"
+         "grid.spacing = Vector3.one;")))
 
     ((p "A grid does not store any data in its vertices, cells or anywhere
         because it does not store any vertices to begin with. With that said, we
         can replicate this very easily. This code example creates a
         three-dimenstional array of world-positions of grid vertices. We will
         use a rectangular grid in this example.")
-     (div (@ (class "highlight"))
-       (pre
-         "int width, height, depth;
-RectGrid grid;
-
-// Change this to whatever type you want
-Vector3[width, height, depth] vertices = new Vector3[width, height, depth];
-
-// Loop over the grid
-for (var i = 0; i < width; ++i) {
-    for (var j = 0; j < height, ++j) {
-        for (var k = 0; k < depth, ++k) {
-            // store the world coordinates of the grid points
-            vertices[i, j, k] = grid.GridToWorld(new Vector3(i, j, k));
-        }
-    }
-}"))
+     (pre
+       (code
+         "int width, height, depth;\n"
+         "RectGrid grid;\n"
+         "\n"
+         "// Change this to whatever type you want\n"
+         "Vector3[width, height, depth] vertices = new Vector3[width, height, depth];\n"
+         "\n"
+         "// Loop over the grid\n"
+         "for (var i = 0; i < width; ++i) {\n"
+         "    for (var j = 0; j < height, ++j) {\n"
+         "        for (var k = 0; k < depth, ++k) {\n"
+         "            // store the world coordinates of the grid points\n"
+         "            vertices[i, j, k] = grid.GridToWorld(new Vector3(i, j, k));\n"
+         "        }\n"
+         "    }\n"
+         "}"))
      (p "You can then index the array using the grid coordinates of the vertex
         you want. We used a simple "
         (code "Vector3")
@@ -148,12 +149,12 @@ for (var i = 0; i < width; ++i) {
         of your choice for Unity. That way you have full control over the
         shape. You can get the points of the lines to render use the grid's
         (code GridToWorld)  method:")
-     (div (@ (class "highlight"))
-       (pre
-         "Vector3 from, to;
-RectGrid grid;
-
-Vector3[2] line = new Vector3[] {grid.GridToWorld(from), grid.GridToWorld(to)};"))
+     (pre
+       (code
+         "Vector3 from, to;\n"
+         "RectGrid grid;\n"
+         "\n"
+         "Vector3[2] line = new Vector3[] {grid.GridToWorld(from), grid.GridToWorld(to)};"))
      (p "This last approach should not be necessary in most cases, the renderer
          API is powerful enough."))
 
@@ -166,40 +167,40 @@ Vector3[2] line = new Vector3[] {grid.GridToWorld(from), grid.GridToWorld(to)};"
         need a list of vertices to contrustruct the nav-mesh from, and we can
         get these vertices from the grid by looping over the range we want to
         use:")
-     (div (@ (class "highlight"))
-       (pre
-         "int width, height, depth;
-RectGrid grid;
-
-Vector3[width, height, depth] vertices = new Vector3[width, height, depth];
-
-// Loop over the grid
-for (var i = 0; i < width; ++i) {
-    for (var j = 0; j < height, ++j) {
-        for (var k = 0; k < depth, ++k) {
-            // store the world coordinates of the grid points
-            vertices[i, j, k] = grid.GridToWorld(new Vector3(i, j, k));
-        }
-    }
-}"))
+     (pre
+       (code
+         "int width, height, depth;\n"
+         "RectGrid grid;\n"
+         "\n"
+         "Vector3[width, height, depth] vertices = new Vector3[width, height, depth];\n"
+         "\n"
+         "// Loop over the grid\n"
+         "for (var i = 0; i < width; ++i) {\n"
+         "    for (var j = 0; j < height, ++j) {\n"
+         "        for (var k = 0; k < depth, ++k) {\n"
+         "            // store the world coordinates of the grid points\n"
+         "            vertices[i, j, k] = grid.GridToWorld(new Vector3(i, j, k));\n"
+         "        }\n"
+         "    }\n"
+         "}"))
      (p "These vertices are in world coordinates and can be then passed on to
        your pathfinding code."))
 
     ((p "Yes, the easiest way is to align the position to grid coordinates.
          Let's assume your object should fit into the centre of the nearest
          face. Here is the code using a rectangular grid:")
-     (div (@ (class "highlight"))
-       (pre
-         "Transform myObject; // Object to align
-RectGrid  myGrid;   // Grid to align to
-
-// Use common defaults
-myGrid.AlignTransform(myObject);
-// More control
-myObject.position = myGrid.AlignVector3(myObject.position);
-// Use grid coordinates
-Vector3 gridPosition;
-myObject.position = myGrid.GridToWorld(gridPosition);"))
+     (pre
+       (code
+         "Transform myObject; // Object to align\n"
+         "RectGrid  myGrid;   // Grid to align to\n"
+         "\n"
+         "// Use common defaults\n"
+         "myGrid.AlignTransform(myObject);\n"
+         "// More control\n"
+         "myObject.position = myGrid.AlignVector3(myObject.position);\n"
+         "// Use grid coordinates\n"
+         "Vector3 gridPosition;\n"
+         "myObject.position = myGrid.GridToWorld(gridPosition);"))
      (p "As you can see there are multiple possibilities, depending on what
         suits you best. To restrict continuous movement apply the snapping of
         your choice on every frame in your "
@@ -207,22 +208,7 @@ myObject.position = myGrid.GridToWorld(gridPosition);"))
         " method."))))
 
 (define content
-  `((style (@ (scoped "scoped")) 
-      "h1 {
-        text-transform: capitalize;
-      }
-      .faq-toc ul {
-        list-style-type: none;
-        padding-left: 0px;
-      }
-      .faq-q a {
-        cursor: pointer;
-      }
-      .faq-a {
-      }")
-    (script (@ (src "js/faq.js"))
-      "")
-    (p "Do you have a question before buying? Check here to see if someone had
+  `((p "Do you have a question before buying? Check here to see if someone had
        the same question before you. If you don't find what you were looking
        for just ask, the more people ask the same thing, the more likely I am
        to add your question to the list as well.")
@@ -230,6 +216,9 @@ myObject.position = myGrid.GridToWorld(gridPosition);"))
     (div (@ (class "faq-toc"))
       (ul
         ,@(map question->sxml ids questions)))
-    ,@(map answer->sxml ids questions answers)))
+    ,@(map answer->sxml ids questions answers)
+    (script (@ (src "faq.js"))
+      "")))
 
-(acons 'content content metadata)
+(acons 'content content
+       (acons 'css '("faq.css") metadata))
