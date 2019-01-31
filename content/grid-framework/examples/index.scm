@@ -110,22 +110,24 @@ tree."
         this example is for you.  Snapping is a two-step process: first we move
         the object to where the cursor is pointing, then we correct the
         position.")
-     (div (@ (class "highlight"))
-       (pre "transform.position = cursorWorldPoint;
-grid.AlignTransform(transform);")))
+     (pre
+       (code
+         "transform.position = cursorWorldPoint;\n"
+         "grid.AlignTransform(transform);")))
 
     ((p "Grids are infinity large when it come to calculations, but rendering
         an infinite amount of lines is impossible.  We will use a trick instead
         where we dynamically adjust the rendering range of the grid according
         to the camera.  The result is a seamless illusion that only renders the
         bare minimum and only updates when it has to.") 
-     (div (@ (class "highlight"))
-       (pre "for (int i = 0; i < 3; i++) {
-    rangeShift[i] += transform.position[i] - lastPosition[i];
-}
-
-renderer.From += rangeShift;
-renderer.To   += rangeShift;")))
+     (pre
+       (code
+         "for (int i = 0; i < 3; i++) {\n"
+         "    rangeShift[i] += transform.position[i] - lastPosition[i];\n"
+         "}\n"
+         "\n"
+         "renderer.From += rangeShift;\n"
+         "renderer.To   += rangeShift;")))
 
     ((p "We generate a mesh as a SimCity-like terrain from data. Clicking a
         vertex raises or lowers it. Everything is accomplished be converting
