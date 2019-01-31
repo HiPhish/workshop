@@ -13,8 +13,8 @@
         components, so you add them to any of your Game Objects you wish.  You
         can add grids either using the editor or programmatically at runtime
         and modify its properties.")
-     (div (@ (class "highlight"))
-       (pre
+     (pre
+       (code
          "GameObject go;\n"
          "RectGrid grid = go.AddComponent<RectGrid>();\n"
          "// Add a renderer for display\n"
@@ -42,8 +42,8 @@
      (p "Let's say we wanted to move a unit from one point in the grid to
          another. If we know the grid coordinates we can compute the world
          coordinates and pass them to your movement function:")
-     (div (@ (class "highlight"))
-        (pre
+     (pre
+        (code
           "Vector3 origin      = grid.gridToWorld(originInGrid    );\n"
           "Vector3 destination = grid.gridToWorld(desinationInGrid);\n"
           "MoveUnit(from: origin, to: destination);"))
@@ -52,8 +52,8 @@
         the "
         (code "AlignTransform")
         " extension method comes into play:")
-     (div (@ (class "highlight"))
-       (pre
+     (pre
+       (code
          "Transform t;\n"
          "// Move the object the usual way with no snapping first\n"
          "// And then correct its position by snapping\n"
@@ -77,8 +77,8 @@
         grid's rotation or position just get the information from the "
         (code "Transform")
         " component, like any other object in Unity.")
-     (div (@ (class "highlight"))
-       (pre
+     (pre
+       (code
          "// This works as you would expect\n"
          "Quaternion gridRotation = grid.transform.rotation;")))
     ("Small memory footprint"
@@ -103,8 +103,8 @@
         might not be. If your grids are exceptionally large you will be glad
         to know that Grid Framework can compute points for use with the
         popular Vectrosity add-on.")
-     (div (@ (class "highlight"))
-       (pre
+     (pre
+       (code
          "// Set the rendering range and colour\n"
          "renderer.From   = new Vector3( 0,  0, 0);\n"
          "renderer.To     = new Vector3(10, 10, 5);\n"
@@ -124,8 +124,8 @@
           "Vectrosity's web site")
         ". Vectrosity and Grid Framework are entirely unrelated products and I
         am in no way affiliated with the author of Vectrosity.")
-     (div (@ (class "highlight"))
-       (pre
+     (pre
+       (code
          "// Grid Framework gets the points and then Vectrosity takes over\n"
          "var points = grid.GetVectrosityPoints();\n"
          "gridLine = new Vectrosity.VectorLine(\"My lines\", points, lineColors, lineMaterial, lineWidth);")))
