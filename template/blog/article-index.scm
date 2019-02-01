@@ -41,8 +41,7 @@ Required metadata:
   
   (define css '("/css/article_index.css"))
   (define new-content
-    `((h1 "Articles of the blog")
-      (main
+    `((main (@ (class "blogpost-listing"))
         (ul
           ,@content))
       ,(if (> pages 1)
