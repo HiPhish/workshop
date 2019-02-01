@@ -4,18 +4,17 @@
 (define metadata
   '((title    . "Showcase - Grid Framework")
     (sub-site . grid-framework)
-    (css      . ("/css/magnific-popup.css" "/css/magnific-popup-custom.css"))))
+    (css      . ("showcase.css" "/css/magnific-popup.css" "/css/magnific-popup-custom.css"))))
 
 (define (showcase->sxml title url img description author)
   "Build up an SXML tree of a showcased game's description."
-  `(div (@ (class "row showcase")
-           (style "margin-bottom: 3em;"))
-     (div (@ (class "col-md-4 showcase-pic"))
+  `(article (@ (class "showcase"))
+     (div (@ (class "showcase-pic"))
        (a (@ (href ,(string-append "img/" img)))
-         (img (@ (class "group1 img-responsive")
+         (img (@ (class "group1")
                  (src ,(string-append "img/" img))
                  (alt ,title)))))
-     (div (@ (class "col-md-8"))
+     (div
        (h2
          (a (@ (href ,url))
            ,title))
