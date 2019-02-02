@@ -50,8 +50,17 @@ Required metadata:
   (define tags        (assq-ref data 'tags       ))
   (define blog        (assq-ref data 'blog       ))
   (define periods     (assq-ref data 'periods    ))
+  (define blog-url    (assq-ref blog 'url        ))
 
-  (define blog-url (assq-ref blog 'url))
+  (define (breadcrumb->sxml item)
+    "Convert a breadcrumb entry from the items to an SXML tree"
+    (define title (assq-ref item 'title))
+    (define url   (assq-ref item 'url  ))
+    `(li (@ (class ,(if url "" "active")))
+       ,(if url
+          `(a (@ (href ,url))
+             ,title)
+          title)))
 
   (define (category->sxml category)
     "Convert an item from the categories alist into an SXML tree."
@@ -71,20 +80,26 @@ Required metadata:
        (a (@ (href ,(string-append blog-url "tags/" url)))
          ,(format #f "~A (~A)" title (length posts)))))
 
-   (define new-content
-     `((h1 "Blog")
-         
-       (section
-         ,(breadcrumbs->sxml breadcrumbs)
-         ;; Article body, splice in content here
-         ,@content)
+  (define (period->sxml year)
+    `(li
+       (a (@ (href ,(format #f "~A~A/" blog-url (car year))))
+         ,(format #f "~A (~A)"
+                  (car year)
+                  (fold + 0 (map (λ (month) (length (cdr month))) (cdr year)))))))
 
+   (define new-content
+     `((nav (@ (class "breadcrumbs")
+               (aria-label "Breadcrumbs"))
+         (ol
+           ,@(map breadcrumb->sxml breadcrumbs)))
+       (main
+         ,@content)
        ;; Left pillar, article navigation
-       (nav (@ (class "well"))
+       (nav (@ (class "blog-navigation")
+               (aria-label "Blog navigation"))
          ;; This navigator contains links to the various archive types.
-         (h1 "Blog navigation")
          (aside
-           (strong "Subscribe:")
+           (span "Subscribe:")
            " "
            (a (@ (href ,(string-append blog-url "rss.xml"))
                  (type "application/rss+xml"))
@@ -102,13 +117,7 @@ Required metadata:
              ; For each year display a year link to that year's archive. If the
              ; year is the year of the current post display a sub-list for that year
              ,@(reverse!
-                 (map (λ (year)
-                        `(li
-                           (a (@ (href ,(format #f "~A~A/" blog-url (car year))))
-                             ,(format #f "~A (~A)"
-                                      (car year)
-                                      (fold + 0 (map (λ (month) (length (cdr month))) (cdr year)))))))
-                      periods))))
+                 (map period->sxml periods))))
          (nav
            (h1
              (a (@ (href ,(string-append blog-url "categories/")))
@@ -126,25 +135,3 @@ Required metadata:
    (let ((css (assq-ref data 'css))
          (data (acons 'content new-content data)))
      (acons 'css (cons "/css/blog.css" (if css css '())) data)))
-
-(define (breadcrumbs->sxml items)
-  "Generate a list of breadcrumbs for use within a blog. The nature of the
-breadcrumbs (caption, URL, activity) depends on the arguments. The result is a
-tree to be used directly, not spliced in.
-   
-The `items` is a list of alists. For each item a `title` is required and a
-`url` is optional."
-
-  (define (item->sxml item)
-    "Convert a breadcrumb entry from the items to an SXML tree"
-    (define title (assq-ref item 'title))
-    (define url   (assq-ref item 'url  ))
-    `(li (@ (class ,(if url "" "active")))
-       ,(if url
-          `(a (@ (href ,url))
-             ,title)
-          title)))
-
-   `(nav (@ (aria-label "Breadcrumbs"))
-      (ol (@ (class "breadcrumbs"))
-        ,@(map item->sxml items))))
