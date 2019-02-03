@@ -43,7 +43,7 @@
       (section
         ,@content)
       ,(if modified
-         `(footer (@ (class "col-md-12"))
+         `(footer
             (p "Last updated: " (date->string modified "~1")))
          "")))
 

@@ -70,7 +70,7 @@ list."
                           (title (assq-ref copyright 'title))
                           (image (assq-ref copyright 'image))
                           (url   (assq-ref copyright   'url)))
-                      `(p (@ (class "text-muted"))
+                      `(p
                          ,(if image
                             `(a (@ (href ,url))
                                (img (@ (class "copyright-image")
@@ -84,8 +84,7 @@ list."
                         `(a (@ (href ,(assq-ref item 'url))
                                (title ,(assq-ref item 'title))
                                (target "blank"))
-                           (img (@ (class "img-circle")
-                                   (src   ,(assq-ref item 'image))
+                           (img (@ (src   ,(assq-ref item 'image))
                                    (alt   ,(assq-ref item 'title))))
                            " "))
                       (assq-ref footer 'social)))
