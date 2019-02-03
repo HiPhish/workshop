@@ -7,7 +7,8 @@ body > section > section {
 	display: grid;
 	grid-template:
 		"nav breadcrumbs" minmax(0px, auto)
-		"nav main" auto / 15em auto;
+		"nav main" 
+		"nav pager" auto / 15em auto;
 	grid-gap: 0em 1em;
 	margin-bottom: 1em;
 }
@@ -68,7 +69,7 @@ main.blogpost-listing > ul {
 
 
 /* ---[ Pager (previous & next post) ]-------------------------------------- */
-footer.blog-pager > nav {  /* The class should be renamed after removing Bootstrap */
+nav.blog-pager {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -77,7 +78,7 @@ footer.blog-pager > nav {  /* The class should be renamed after removing Bootstr
 	border-top: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-footer.blog-pager > nav > a {
+nav.blog-pager > a {
 	color: #fff;
 	text-decoration: none;
 	background-color: #18bc9c;
@@ -85,10 +86,12 @@ footer.blog-pager > nav > a {
 	border-radius: 2em;
 	text-align: center;
 }
-footer.blog-pager > nav > a:last-child { margin-left: auto; }
-footer.blog-pager > nav > a:focus { background-color: #0f7864; }
-footer.blog-pager > nav > a:hover { background-color: #0f7864; }
-footer.blog-pager > nav > a[hidden] { display: none; }
+nav.blog-pager > a:last-child { margin-left: auto; }
+nav.blog-pager > a:focus { background-color: #0f7864; }
+nav.blog-pager > a:hover { background-color: #-1f7864; }
+nav.blog-pager > a[hidden] { display: none; }
+
+@media(max-width: 768px) { nav.blog-pager { margin-bottom: 1em; } }
 /* ------------------------------------------------------------------------- */
 
 
@@ -118,6 +121,7 @@ main > article > p > img:only-child , main > article > p > a:only-child > img:on
 		grid-template:
 			"breadcrumbs"
 			"main"
+			"pager"
 			"nav" / auto;
 	}
 
@@ -135,11 +139,11 @@ main > article > p > img:only-child , main > article > p > a:only-child > img:on
 
 
 /* ###[ Blog post index ]################################################### */
-footer.paginator > nav {
+nav.paginator {
 	display: flex;
 	justify-content: center;
 }
-footer.paginator > nav > ul {
+nav.paginator > ul {
 	display: flex;
 	flex-wrap: wrap;
 	list-style: none;
@@ -147,17 +151,19 @@ footer.paginator > nav > ul {
 	margin-top: 1em;
 	margin-bottom: 0;
 }
-footer.paginator > nav > ul > li > a {
+nav.paginator > ul > li > a {
 	float: left;
 	padding: 10px 15px;
 	color: #ffffff;
 	background-color: #18bc9c;
 	text-decoration: none;
 }
-footer.paginator > nav > ul > li.active > a,
-footer.paginator > nav > ul > li > a:hover,
-footer.paginator > nav > ul > li > a:focus {
+nav.paginator > ul > li.active > a,
+nav.paginator > ul > li > a:hover,
+nav.paginator > ul > li > a:focus {
 	background-color: #0f7864;
 }
-footer.paginator > nav > ul > li:first-child > a { border-radius: 4px 0 0 4px; }
-footer.paginator > nav > ul > li:last-child  > a { border-radius: 0 4px 4px 0; }
+nav.paginator > ul > li:first-child > a { border-radius: 4px 0 0 4px; }
+nav.paginator > ul > li:last-child  > a { border-radius: 0 4px 4px 0; }
+
+@media(max-width: 768px) { nav.paginator > ul { margin-bottom: 1em; } }

@@ -45,10 +45,9 @@ Required metadata:
         (ul
           ,@content))
       ,(if (> pages 1)
-         `(footer (@ (class "paginator"))
-            (nav
+         `(nav (@ (class "paginator"))
               (ul 
-                ,@(paginator page pages))))
+                ,@(paginator page pages)))
          '())
       ))
 

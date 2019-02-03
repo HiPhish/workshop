@@ -117,9 +117,10 @@ Optional metadata:
                  "Tags: "
                  ,@(map tag->sxml tags))))
            ,@content
-           ,(if (or prev next)
-              (pager->sxml prev next)
-            '())))))
+           ))
+      ,(if (or prev next)
+         (pager->sxml prev next)
+         '())))
 
   (define metadata
     `((content     . ,new-content)
@@ -145,16 +146,15 @@ Optional metadata:
              " "
              ,title))))
 
-  `(footer (@ (class "blog-pager"))
-     (nav
-       ,(if prev
-          (item->sxml prev "previous" "←" #f)
-          '(a (@ (hidden "hidden"))
-             ""))
-       ,(if next
-          (item->sxml next "next" "→" #t)
-          '(a (@ (style "display: none;"))
-             "")))))
+  `(nav (@ (class "blog-pager"))
+     ,(if prev
+        (item->sxml prev "previous" "←" #f)
+        '(a (@ (hidden "hidden"))
+           ""))
+     ,(if next
+        (item->sxml next "next" "→" #t)
+        '(a (@ (style "display: none;"))
+           ""))))
 
 (define (tag->sxml tag)
   (define title (assq-ref tag 'title))

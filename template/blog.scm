@@ -92,8 +92,7 @@ Required metadata:
                (aria-label "Breadcrumbs"))
          (ol
            ,@(map breadcrumb->sxml breadcrumbs)))
-       (main
-         ,@content)
+       ,@content
        ;; Left pillar, article navigation
        (nav (@ (class "blog-navigation")
                (aria-label "Blog navigation"))
