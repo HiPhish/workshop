@@ -46,7 +46,7 @@ list."
          (header
            ;; Top navigation bar
            ,(main-navbar site-name menu-bar))
-         (section
+         (div
            ;; -- insert sub-navigation here ---
            ,@content)
          ;; Footer of the website
