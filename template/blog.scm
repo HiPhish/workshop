@@ -88,47 +88,48 @@ Required metadata:
                   (fold + 0 (map (λ (month) (length (cdr month))) (cdr year)))))))
 
    (define new-content
-     `((nav (@ (class "breadcrumbs")
-               (aria-label "Breadcrumbs"))
-         (ol
-           ,@(map breadcrumb->sxml breadcrumbs)))
-       ,@content
-       ;; Left pillar, article navigation
-       (nav (@ (class "blog-navigation")
-               (aria-label "Blog navigation"))
-         ;; This navigator contains links to the various archive types.
-         (aside
-           (span "Subscribe:")
-           " "
-           (a (@ (href ,(string-append blog-url "rss.xml"))
-                 (type "application/rss+xml"))
-             "RSS")
-           ; ", "
-           ; (a (@ (href ,(string-append blog-url "atom.xml"))
-           ;       (type  "application/atom+xml"))
-           ;   "Atom")
-           )
-         (nav
-           (h1
-             (a (@ (href ,(format #f "~Aarchive/" blog-url)))
-               "Archive"))
-           (ul
-             ; For each year display a year link to that year's archive. If the
-             ; year is the year of the current post display a sub-list for that year
-             ,@(reverse!
-                 (map period->sxml periods))))
-         (nav
-           (h1
-             (a (@ (href ,(string-append blog-url "categories/")))
-               "Categories"))
-           (ul
-             ,@(map category->sxml categories)))
-         (nav
-           (h1
-             (a (@ (href ,(string-append blog-url "tags/")))
-               "Tags"))
-           (ul
-             ,@(map tag->sxml tags))))))
+     `((div (@ (class "blog"))
+         (nav (@ (class "breadcrumbs")
+                 (aria-label "Breadcrumbs"))
+           (ol
+             ,@(map breadcrumb->sxml breadcrumbs)))
+         ,@content
+         ;; Left pillar, article navigation
+         (nav (@ (class "blog-navigation")
+                 (aria-label "Blog navigation"))
+           ;; This navigator contains links to the various archive types.
+           (aside
+             (span "Subscribe:")
+             " "
+             (a (@ (href ,(string-append blog-url "rss.xml"))
+                   (type "application/rss+xml"))
+               "RSS")
+             ; ", "
+             ; (a (@ (href ,(string-append blog-url "atom.xml"))
+             ;       (type  "application/atom+xml"))
+             ;   "Atom")
+             )
+           (nav
+             (h1
+               (a (@ (href ,(format #f "~Aarchive/" blog-url)))
+                 "Archive"))
+             (ul
+               ; For each year display a year link to that year's archive. If the
+               ; year is the year of the current post display a sub-list for that year
+               ,@(reverse!
+                   (map period->sxml periods))))
+           (nav
+             (h1
+               (a (@ (href ,(string-append blog-url "categories/")))
+                 "Categories"))
+             (ul
+               ,@(map category->sxml categories)))
+           (nav
+             (h1
+               (a (@ (href ,(string-append blog-url "tags/")))
+                 "Tags"))
+             (ul
+               ,@(map tag->sxml tags)))))))
 
    ;; Add the new extra CSS to the data as necessary, but first add the new content
    (let ((css (assq-ref data 'css))

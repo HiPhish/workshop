@@ -151,12 +151,6 @@ body > div {
 @media(min-width:  992px) { body > div { width:  970px } }
 @media(min-width: 1200px) { body > div { width: 1170px } }
 
-body > div > section {
-	width: 100%;
-	margin: auto;
-	padding: 0 15px;
-}
-
 
 /* ###[ Footer of each page ]############################################### */
 body > footer {

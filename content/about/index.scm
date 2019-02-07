@@ -8,9 +8,10 @@
   '((h3 "About the author")
     (p
       "Hi, I'm HiPhish and this is my website. I'm a mathematician and a
-      programmer and my motto is <em>I want to to exist, so I'll make it</em>.
-      The goal is rock-solid software that is reliable and fit for productive
-      use, because I wouldn't want to use anything else myself.")
+      programmer and my motto is "
+      (em "I want it to to exist, so I'll make it")
+      ". The goal is rock-solid software that is reliable and fit for
+      productive use, because I wouldn't want to use anything else myself.")
     (p
       "I chose the "
       (em "Workshop")

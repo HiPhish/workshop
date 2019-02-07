@@ -164,7 +164,7 @@
      )))
 
 (define (feature->sxml title first . rest)
-  `(div (@ (class "feature"))
+  `(div
      (h2 ,title)
      ,first
      ,@(if (not (null? rest))
@@ -176,7 +176,8 @@
          '())))
 
 (define content
-  `(,@(map (λ (feature) (apply feature->sxml feature)) features)
+  `((div (@ (id "features"))
+      ,@(map (λ (feature) (apply feature->sxml feature)) features))
     (script (@ (src "features.js"))
       "")))
 

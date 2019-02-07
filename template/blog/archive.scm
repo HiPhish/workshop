@@ -38,12 +38,12 @@ Required metadata.
       ((title . "archive"))))
 
   (define content
-    `((main(ul
-        ,@(reverse! (map year->sxml periods))))))
+    `((main (@ (id "archive"))
+        (ul
+          ,@(reverse! (map year->sxml periods))))))
 
   (append `((breadcrumbs . ,breadcrumbs)
-            (content     . ,content)
-            (css         . ("/css/article_index.css")))
+            (content     . ,content))
           data))
 
 (define (year->sxml year)

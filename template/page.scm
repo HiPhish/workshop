@@ -40,8 +40,7 @@
     `(,(if sub-site
          (sub-site-navigation (assq-ref sub-sites sub-site))
          '())
-      (section
-        ,@content)
+      ,@content
       ,(if modified
          `(footer
             (p "Last updated: " (date->string modified "~1")))
