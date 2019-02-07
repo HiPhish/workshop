@@ -39,7 +39,6 @@ Required metadata:
   (define page    (assq-ref data 'page   ))
   (define content (assq-ref data 'content))
   
-  (define css '("/css/article_index.css"))
   (define new-content
     `((main (@ (class "blogpost-listing"))
         (ul
@@ -51,8 +50,7 @@ Required metadata:
          '())
       ))
 
-  (acons 'content new-content
-         (acons 'css css data)))
+  (acons 'content new-content data))
 
 (define (articles-list posts relative-to)
   "Build the items for display in an article index. The result is a list of
