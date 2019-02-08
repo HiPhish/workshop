@@ -221,4 +221,6 @@
       "")))
 
 (acons 'content content
-       (acons 'css '("faq.css") metadata))
+       (acons 'css '("faq.css")
+              (acons 'js '("https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
+                     metadata)))
