@@ -1,5 +1,6 @@
 title: A new static site generator
 category: organisation
+tags: lisp
 ---
 
 Over two years already without rewriting the workshop? I have to rectify this,

@@ -1,5 +1,5 @@
 title: Introducing IPS-Tools
-category: ips-tools
+category: open-source
 ---
 
 I found myself needing a program to apply binary patches in the IPS file format

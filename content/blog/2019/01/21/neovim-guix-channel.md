@@ -1,5 +1,6 @@
 title: Neovim channel for GNU Guix
 category: vim
+tags: lisp, vim
 ---
 
 I have set up a [channel] for [GNU Guix] to build [Neovim]. This channel serves

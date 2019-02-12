@@ -1,5 +1,6 @@
 title: De-Bootsrapping the workshop, part 1
 category: organisation
+tags: html
 ---
 
 The first major step in phasing out the bloat that is [Bootstrap] from my

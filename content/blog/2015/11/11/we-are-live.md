@@ -1,5 +1,5 @@
 title: We are live!
-tags: website
+tags: html
 category: organisation
 ---
 

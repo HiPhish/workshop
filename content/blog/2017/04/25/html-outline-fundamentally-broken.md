@@ -1,5 +1,5 @@
 title: Outlining of HTML pages is fundamentally broken
-tags: html, rant, outline
+tags: html, rant
 ---
 
 If you were to run the Workshop through an HTML validator you would notice a

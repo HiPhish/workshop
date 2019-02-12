@@ -1,5 +1,5 @@
 title: Introducing NTFS-Clone
-category: ntfs-clone
+category: open-source
 ---
 
 This is  a very  useful project  I had  written quite  a while  ago at work and

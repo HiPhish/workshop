@@ -1,4 +1,5 @@
 title: A purely functional fixed timestep loop
+tags: lisp
 ---
 
 There is a great article by Glenn Fiedler titled [“Fix Your Timestep!”] in

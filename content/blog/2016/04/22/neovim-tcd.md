@@ -1,6 +1,6 @@
 title: Neovim has tab-local working directories now
 tags: vim
-category: open-source
+category: vim
 ---
 
 My Neovim PR to add tab-local working directories has recently been merged.  In

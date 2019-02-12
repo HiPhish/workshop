@@ -1,5 +1,6 @@
 title: Introducing Quicklisp.nvim
 category: vim
+tags: lisp, vim
 ---
 
 One of the new features of [Neovim] is its ability to write plugins in any

@@ -1,5 +1,6 @@
 title: A pure HTML & CSS menubar
 category: organisation
+tags: html
 ---
 
 In the process of de-Bootstrapping the workshop I have to replace whole

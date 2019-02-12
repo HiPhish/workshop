@@ -1,6 +1,6 @@
 title: Introducing REPL.nvim
 tags: vim
-category: open-source
+category: vim
 ---
 
 Integrating a REPL in Vim has been a difficult issue in the past, but with

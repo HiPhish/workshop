@@ -1,5 +1,5 @@
 title: Rewriting the Workshop
-tags: website
+tags: html
 category: organisation
 ---
 
