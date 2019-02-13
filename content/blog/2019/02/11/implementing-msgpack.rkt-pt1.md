@@ -20,6 +20,10 @@ static typing, so I will be using that variant of the language.
 I expect the series to span three parts. As it goes on I will add the
 corresponding links here.
 
+- Part 1: Introduction
+- [Part 2](../../13/implementing-msgpack.rkt-pt2/): Packing
+- [Part 3](#): Unpacking (to be written)
+
 
 ## The motivation behind MessagePack
 
