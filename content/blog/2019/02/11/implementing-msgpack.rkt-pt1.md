@@ -22,7 +22,7 @@ corresponding links here.
 
 - Part 1: Introduction
 - [Part 2](../../13/implementing-msgpack.rkt-pt2/): Packing
-- [Part 3](#): Unpacking (to be written)
+- [Part 3](../../15/implementing-msgpack.rkt-pt3/): Unpacking
 
 
 ## The motivation behind MessagePack

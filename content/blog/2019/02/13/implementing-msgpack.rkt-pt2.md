@@ -12,7 +12,7 @@ series under the following links:
 
 - [Part 1](../../11/implementing-msgpack.rkt-pt1/): Introduction
 - Part 2: Packing
-- [Part 3](#): Unpacking (to be written)
+- [Part 3](../../15/implementing-msgpack.rkt-pt3/): Unpacking
 
 
 ## Overview
