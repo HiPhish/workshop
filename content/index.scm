@@ -31,7 +31,9 @@
 
 (define product-imgs
   '("grid-framework.png" "info.vim.png" "repl.nvim.png"
-    "ntfs-clone.png"     "newton.png"   "roll.jpg"
+    "analogue-data-disc-117729.jpg"
+    "newton.png"
+    "black-black-and-white-cubes-37534.jpg"
     "game-docs.png"      "xeen.png"))
 
 (define product-alts
