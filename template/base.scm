@@ -115,10 +115,6 @@ list."
               (href "/css/local-nav.css")
               (type "text/css")
               (media "all")))
-     (link (@ (rel "stylesheet")
-              (href "/css/pygments.css")
-              (type "text/css")
-              (media "all")))
      ;; Extra CSS from metadata
      ,(map (λ (url)
 		         `(link (@ (rel "stylesheet")
