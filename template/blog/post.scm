@@ -59,8 +59,6 @@ Optional metadata:
                  (assq-ref data 'tags)))
          (assq-ref post 'tags)))
 
-  ;; Extra CSS for blogs
-  (define css '("/css/article.css"))
   ;; Breadcrumbs for blog navigation; clicking a date portion takes us to that
   ;; date period archive. This is flawed because it assumes that the period
   ;; granularity is always the same.
@@ -75,7 +73,7 @@ Optional metadata:
       ((title . ,(assq-ref post 'slug)))))
 
   (define new-content
-    `((main
+    `((main (@ (class "blogpost"))
         (article
           (h1
             (a (@ (href  ".")
@@ -124,8 +122,7 @@ Optional metadata:
 
   (define metadata
     `((content     . ,new-content)
-      (breadcrumbs . ,breadcrumbs)
-      (css         . ,css)))
+      (breadcrumbs . ,breadcrumbs)))
   (append metadata data))
 
 (define (pager->sxml prev next)
