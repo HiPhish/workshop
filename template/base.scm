@@ -63,7 +63,8 @@ list."
                       `(a (@ (href ,url)
                              (title ,title))
                          (img (@ (src ,image)
-                                 (title ,title)))))))
+                                 (title ,title)
+                                 (height "55")))))))
                ,(let ((copyright (assq-ref footer 'copyright)))
                   (if (not copyright)
                     ""
@@ -85,11 +86,11 @@ list."
                         `(a (@ (href ,(assq-ref item 'url))
                                (title ,(assq-ref item 'title))
                                (target "blank"))
-                           (img (@ (src   ,(assq-ref item 'image))
-                                   (alt   ,(assq-ref item 'title))))
+                           (img (@ (src    ,(assq-ref item 'image))
+                                   (alt    ,(assq-ref item 'title))
+                                   (height "55")))
                            " "))
-                      (assq-ref footer 'social)))
-           )))))
+                      (assq-ref footer 'social))))))))
 
   (acons 'content new-content data))
 
