@@ -59,6 +59,8 @@
                (url   . "/#products"    )
                (items . (((title . "NTFS-Clone")
                           (url   . "https://gitlab.com/HiPhish/ntfs-clone"))
+                         ((title . "IPS-Tools")
+                          (url   . "https://gitlab.com/HiPhish/IPS-Tools"))
                          ((title . "roll")
                           (url   . "https://gitlab.com/HiPhish/roll"))
                          ((title . "Newton's Method in C")

@@ -24,6 +24,7 @@
     "info.vim"
     "Repl.nvim"
     "NTFS-Clone"
+    "IPS-Tools"
     "Newton's method in C"
     ((code "roll") " - Roll dice on the command line")
     "Game source documenation"
@@ -31,14 +32,15 @@
 
 (define product-imgs
   '("grid-framework.png" "info.vim.png" "repl.nvim.png"
-    "analogue-data-disc-117729.jpg"
+    "analogue-data-disc-117729.jpg" "ips.svg"
     "newton.png"
     "black-black-and-white-cubes-37534.jpg"
     "game-docs.png"      "xeen.png"))
 
 (define product-alts
   '("Grid Framework logo" "info.vim screenshot"  "REPL.nvim image"
-    "NTFS-clone logo"     "Newton's method logo" "'roll' logo"
+    "NTFS-clone logo"     "IPS-Tools logo"
+    "Newton's method logo" "'roll' logo"
     "Game source documentation screenshot" "Image extracted from the game"))
 
 (define product-urls
@@ -46,6 +48,7 @@
     "https://gitlab.com/HiPhish/info.vim"
     "https://gitlab.com/HiPhish/repl.nvim"
     "https://gitlab.com/HiPhish/ntfs-clone"
+    "https://gitlab.com/HiPhish/IPS-Tools"
     "https://github.com/HiPhish/Newton-method"
     "https://gitlab.com/HiPhish/roll"
     "https://github.com/HiPhish/Game-Source-Documentation"
@@ -66,6 +69,10 @@
     ((p "Create perfect 1:1 copies of NTFS hard drives. The resulting hard
         drive can be inserted right back into a PC and be booted from without
         having to run any additional steps."))
+    ((p "Command-line tools and C library for working with binary patches in
+        the IPS format, supports the common \"truncation\" extension. Users can
+        apply and generate patches, inspect patch files, and use the library in
+        their own applications."))
     ((p "One of my earlier projects written as an exercise for myself.  It
         implements Newton's method of finding the root of a function in C using
         only the standard library. The program acts as a compiler and virtual
