@@ -62,7 +62,6 @@
   (define items (assq-ref sub-site 'items))
 
   `(nav (@ (class "local-nav"))
-     (h1 "Sub-site navigation bar")
      (ul
        (li
          (a (@ (href ,url))

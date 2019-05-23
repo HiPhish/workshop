@@ -8,8 +8,6 @@
 	margin-bottom: 1em;
 }
 
-.local-nav > h1 { display: none; }
-
 .local-nav > ul {
 	display: flex;
 	flex-wrap: wrap;
