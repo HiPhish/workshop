@@ -72,7 +72,7 @@
                          ((title . "Game Source Documentation")
                           (url   . "https://github.com/HiPhish/Game-Source-Documentation")))))
               ((title . "Vim/Nvim plugins" )
-               (url   . "/#products"            )
+               (url   . "/vim/plugins/"            )
                (items . (((title . "Info.vim")
                           (url   . "https://gitlab.com/HiPhish/info.vim"))
                          ((title . "REPL.nvim")
