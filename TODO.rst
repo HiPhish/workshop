@@ -1,5 +1,8 @@
 .. default-role:: code
 
+- The content and related metadata (like `css`) of a blog post should not be on
+  a lower lever (inside the `post` data) than other data like `next`.
+
 - Get rid of Bootstrap and jQuery. Enough said.
 
 - The periods in the side bar of the blog should show the months for the

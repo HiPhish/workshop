@@ -44,6 +44,7 @@ Optional metadata:
   (define date     (assq-ref post 'date    ))
   (define modified (assq-ref post 'modified))
   (define content  (assq-ref post 'content ))
+  (define css      (assq-ref post 'css ))
 
   (define category
     (find (λ (c)
@@ -121,7 +122,8 @@ Optional metadata:
          '())))
 
   (define metadata
-    `((content     . ,new-content)
+    `((css         . ,(if css css '()))
+      (content     . ,new-content)
       (breadcrumbs . ,breadcrumbs)))
   (append metadata data))
 
