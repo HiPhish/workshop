@@ -27,34 +27,27 @@
   "Build a web page (or any other file) `out-file` according to the `generator`
 thunk. Only rebuild the file if it is older than any of its `dependencies` or
 `force?` is true."
-  (when (file-needs-rebuild? out-file dependencies force?)
+  (when (or force? (file-needs-rebuild? out-file dependencies))
     (mkdir-p (dirname out-file))
     (generator out-file)))
 
 (define* (mkdir-p path #:optional (mode #f))
   "Creates a new directory like `mkdir`, but creating intermediate directories
 if necessary. Similar to `mkdir -p` in the shell, hence the name."
-  (if (access? path W_OK)
-    #t
-    (begin
-      (mkdir-p (dirname path) mode)
-      (if mode
+  (unless (access? path W_OK)
+    (mkdir-p (dirname path) mode)
+    (if mode
         (mkdir path mode)
-        (mkdir path)))))
+        (mkdir path))))
 
-(define* (file-needs-rebuild? fname dependencies #:optional (force? #f))
+(define (file-needs-rebuild? fname dependencies)
   "Whether a given target file with given dependency files needs to be rebuilt.
 
 A file needs to be rebuilt if it does not exists, if the templates have been
 changed, or if it's older than any one of its dependencies."
-  (cond
-    (force? #t)
-    ((not (access? fname W_OK)) #t)
-    (else
+  (or (not (access? fname W_OK))
       (let ((modtime (stat:mtime (stat fname))))
-        (cond
-          ((> modtime (stat:mtime (stat "template"))) #t)
-          (or-map (λ (dependency)
-                (> (stat:mtime (stat dependency))
-                   modtime))
-        dependencies))))))
+        (or (> modtime (stat:mtime (stat "template")))  ;; The template directory should not be hard-coded
+            (or-map (λ (dependency)
+                      (< modtime (stat:mtime (stat dependency))))
+                    dependencies)))))
