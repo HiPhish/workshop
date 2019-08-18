@@ -1,5 +1,3 @@
-#!/usr/bin/guile
-!#
 ;;; Copyright 2019 Alejandro "HiPhish" Sanchez
 ;;;
 ;;; This file is part of The Workshop.
