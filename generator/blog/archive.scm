@@ -19,7 +19,7 @@
 
 (define-module (generator blog archive)
   #:use-module ((generator)
-                #:select (build-page))
+                #:select (generate-file))
   #:use-module ((generator templated)
                 #:select (templated-generator))
   #:use-module ((template base)         #:select (base-page))
@@ -37,4 +37,4 @@
   (define out-file (string-append out-dir
                                   (assq-ref blog 'url)
                                   "archive/index.html"))
-  (build-page out-file '() (templated-generator template data)))
+  (generate-file out-file '() (templated-generator template data)))

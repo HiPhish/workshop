@@ -21,7 +21,7 @@
   #:use-module ((srfi srfi-19)
                 #:select (date-year date-month date-day))
   #:use-module ((generator)
-                #:select (build-page))
+                #:select (generate-file))
   #:use-module ((generator templated)
                 #:select (templated-generator))
   #:use-module ((template base)          #:select (base-page))
@@ -63,7 +63,7 @@
       (page  . 1)))
   (define out-file (format #f "~A~A~A/index.html" out-dir (assq-ref blog 'url) year))
 
-  (build-page
+  (generate-file
     out-file
     '() ;; TODO: add dependency on the source directory
     (templated-generator template (append metadata data))))
@@ -80,7 +80,7 @@
       (page  . 1)))
   (define out-file (format #f "~A~A~A/~2,'0d/index.html" out-dir (assq-ref blog 'url) year month))
 
-  (build-page
+  (generate-file
     out-file
     '() ;; TODO: add dependency on the source directory
     (templated-generator template (append metadata data))))

@@ -19,7 +19,7 @@
 
 (define-module (generator blog post)
   #:use-module ((generator)
-                #:select (build-page))
+                #:select (generate-file))
   #:use-module ((generator templated)
                 #:select (templated-generator))
   #:use-module ((template base)          #:select (base-page))
@@ -57,4 +57,4 @@
                                   (assq-ref blog 'url)
                                   (assq-ref post 'url)
                                   "index.html"))
-  (build-page out-file '() (templated-generator template data)))
+  (generate-file out-file '() (templated-generator template data)))

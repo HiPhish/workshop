@@ -28,7 +28,7 @@
   #:use-module ((reader     scheme) #:select (read-from-scheme))
   #:use-module ((reader     skribe) #:select (read-from-skribe))
   #:use-module ((generator)
-                #:select (build-page))
+                #:select (generate-file))
   #:use-module ((generator verbatim)
                 #:select (verbatim-generator))
   #:use-module ((generator blog post)
@@ -147,8 +147,8 @@ necessary."
                                      (substring path
                                                 (string-length
                                                   content-dir)))))
-        (build-page out-file (list path)
-                    (verbatim-generator path)))
+        (generate-file out-file (list path)
+                       (verbatim-generator path)))
       result)))
 
 (define (error path stat errno result)

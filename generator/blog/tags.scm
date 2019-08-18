@@ -21,7 +21,7 @@
   #:use-module ((rnrs lists) #:version (6)
                 #:select (find))
   #:use-module ((generator)
-                #:select (build-page))
+                #:select (generate-file))
   #:use-module ((generator templated)
                 #:select (templated-generator))
   #:use-module ((template base)      #:select (base-page))
@@ -40,7 +40,7 @@
     (string-append output-dir
                    (assq-ref blog 'url)
                    "tags/index.html"))
-  (build-page out-file '() (templated-generator template data)))
+  (generate-file out-file '() (templated-generator template data)))
 
 (define (add-tags data)
   "Add the tags from the posts to the metadata."

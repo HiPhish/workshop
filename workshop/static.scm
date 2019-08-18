@@ -19,7 +19,7 @@
   #:use-module ((ice-9 ftw)           #:select (file-system-fold))
   #:use-module ((ice-9 regex)         #:select (string-match match:substring))
   #:use-module ((reader scheme)       #:select (read-from-scheme))
-  #:use-module ((generator)           #:select (build-page))
+  #:use-module ((generator)           #:select (generate-file))
   #:use-module ((generator templated) #:select (templated-generator))
   #:use-module ((generator verbatim)  #:select (verbatim-generator))
   #:use-module ((template base)       #:select (base-page))
@@ -70,7 +70,7 @@ files are copied verbatim."
                                                (- (string-length path)
                                                   3))
                                     "html")))
-       (build-page out-file (list path)
+       (generate-file out-file (list path)
                    (templated-generator (compose base-page page)
                                         (append data result))))
      result)
@@ -79,6 +79,6 @@ files are copied verbatim."
                                      (substring path
                                                 (string-length
                                                   content-dir)))))
-        (build-page out-file (list path)
+        (generate-file out-file (list path)
                     (verbatim-generator path)))
       result)))

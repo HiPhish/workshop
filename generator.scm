@@ -21,15 +21,15 @@
 ;;; disc
 
 (define-module (generator)
-  #:export (build-page))
+  #:export (generate-file))
 
-(define* (build-page out-file dependencies generator #:optional (force? #f))
-  "Build a web page (or any other file) `out-file` according to the `generator`
-thunk. Only rebuild the file if it is older than any of its `dependencies` or
-`force?` is true."
-  (when (or force? (file-needs-rebuild? out-file dependencies))
-    (mkdir-p (dirname out-file))
-    (generator out-file)))
+(define* (generate-file out dependencies generator #:optional (force? #f))
+  "Build a web page (or any other file) OUT according to the GENERATOR thunk.
+Only rebuild the file if it is older than any of its DEPENDENCIES or FORCE? is
+true."
+  (when (or force? (file-needs-rebuild? out dependencies))
+    (mkdir-p (dirname out))
+    (generator out)))
 
 (define* (mkdir-p path #:optional (mode #f))
   "Creates a new directory like `mkdir`, but creating intermediate directories

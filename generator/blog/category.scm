@@ -19,7 +19,7 @@
 
 (define-module (generator blog category)
   #:use-module ((generator)
-                #:select (build-page))
+                #:select (generate-file))
   #:use-module ((generator templated)
                 #:select (templated-generator))
   #:use-module ((template base)          #:select (base-page))
@@ -61,4 +61,4 @@
 
 (define (generate-one-category-page out-file data)
   "Generate one index page for a given category (out of possibly many)."
-  (build-page out-file '() (templated-generator template data)))
+  (generate-file out-file '() (templated-generator template data)))
