@@ -25,18 +25,23 @@
 ;;; generation will be run from here.
 
 (use-modules ((ice-9 getopt-long) #:select (getopt-long option-ref))
-             ((generator pages)   #:select (generate-pages))
              ((generator blog)    #:select (generate-blog))
-             ((config)            #:select (base-data)))
+             ((config)            #:select (base-data))
+             ((workshop static)   #:select (generate-static-content)))
 
 (define (main args)
   ;; Get command-line options
   (define option-spec '((url (value #t))))
   (define options (getopt-long args option-spec))
 
-  ;; Actual blog generation starts here
+  ;; Actual website generation starts here
   (define data (acons 'url (option-ref options 'url "") base-data))
-  (generate-pages "content" "output" data)
+  (define blogs (assq-ref data 'blogs))
+
+  (generate-static-content data "content" "output"
+                           (map (λ (blog)
+                                  (string-append "content" (assq-ref blog 'url)))
+                                blogs))
   (for-each (λ (blog)
               (define sub-site )
               (generate-blog blog
@@ -44,4 +49,4 @@
                              "output"
                              (acons 'sub-site (assq-ref blog 'sub-site)
                                     data)))
-            (assq-ref data 'blogs)))
+            blogs))
