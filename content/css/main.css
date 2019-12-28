@@ -18,6 +18,13 @@ body {
 
 p { text-align: justify; }
 
+a {
+	color: #18bc9c;
+	text-decoration: none;
+}
+
+a:hover { text-decoration: underline; }
+
 pre {
 	background-color: #002b36;
 	overflow-x: auto;
