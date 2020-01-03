@@ -33,6 +33,8 @@ pre {
 }
 pre > code { color: #93a1a1; }
 
+hr { border: 0; border-top: 1px solid #ecf0f1; }
+
 
 /* ###[ TOP NAVIGATION MENU ]############################################### */
 nav#main-navbar {
