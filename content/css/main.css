@@ -21,11 +21,11 @@ body {
 	background-color: #ffffff;
 }
 
-h1 { font-size: 2.5rem; }
-h2 { font-size: 2.0rem; }
-h3 { font-size: 1.5rem; }
+h1 { font-size: 2.5rem; font-weight: normal; margin: 1rem 0 0.5rem; }
+h2 { font-size: 2.0rem; font-weight: normal; margin: 1rem 0 0.5rem; }
+h3 { font-size: 1.5rem; font-weight: normal; margin: 1rem 0 0.5rem; }
 
-p { text-align: justify; }
+p { text-align: justify; margin: 0 0 0.7rem; }
 
 a {
 	color: #18bc9c;
@@ -36,10 +36,11 @@ a:hover { text-decoration: underline; }
 
 pre {
 	background-color: #002b36;
-	overflow-x: auto;
-	word-wrap: normal;
-	white-space: pre;
+	overflow: auto;
+	padding: 0.7rem;
+	border-radius: 0.25rem;
 }
+
 pre > code { color: #93a1a1; }
 
 hr { border: 0; border-top: 1px solid #ecf0f1; }
