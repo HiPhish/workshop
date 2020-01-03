@@ -1,5 +1,11 @@
 /* Main style sheet, will eventually replace Bootstrap. */
 
+:root {
+	/* Set the main font size to a browser-specific default; overrides
+	 * Bootstrap's <html> font size */
+	font-size: medium;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -10,11 +16,14 @@ body {
 	min-height: 100vh;
 	margin: 0;
 	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-size: 15px;
 	line-height: 1.42857143;
 	color: #2c3e50;
 	background-color: #ffffff;
 }
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2.0rem; }
+h3 { font-size: 1.5rem; }
 
 p { text-align: justify; }
 
