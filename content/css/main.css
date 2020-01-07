@@ -53,7 +53,21 @@ pre > code {
 	color: #93a1a1;
 }
 
-hr { border: 0; border-top: 1px solid #ecf0f1; }
+hr {
+	border: 0;
+	border-top: 1px solid #ecf0f1;
+	margin: 1.5rem 0;
+}
+
+blockquote {
+	padding: 0.5rem 1.0rem;
+	border-left: 0.35rem solid #ecf0f1;
+	margin: 0 0 1rem 0;
+}
+
+blockquote > footer {
+	color: #b4bcc2;
+}
 
 
 /* ###[ TOP NAVIGATION MENU ]############################################### */
