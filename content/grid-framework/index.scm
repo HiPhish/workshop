@@ -43,12 +43,12 @@
        based needs. By providing you with new classes all you need to do is
        apply the grid component of your choice onto a "
       (code "GameObject")
-      ",set the values to your liking and start writing your game logic without
-       worrying about the underlying math. No matter whether you are making a
-       board game, a strategy game, a puzzle game, an arcade-style game or
-       just any other type of game that needs clockwork-like precision, Grid
-       Framework will help you in setting up your game and writing your game
-       logic in an intuitive way.")
+      ", set the values to your liking and start writing your game logic
+      without worrying about the underlying math. No matter whether you are
+      making a board game, a strategy game, a puzzle game, an arcade-style game
+      or just any other type of game that needs clockwork-like precision, Grid
+      Framework will help you in setting up your game and writing your game
+      logic in an intuitive way.")
     (p
       "The simplest way to describe Grid Framework would be to call it a
        library. It provides you with new classes and new components complete
