@@ -12,3 +12,14 @@
 
 - Tables in blogs need to be decorated in CSS instead of putting Bootstrap
   classes there.
+
+
+De-bootstrapping progress
+#########################
+
+The following things still fall apart without Bootstrap:
+
+- `.badge` class for price labels
+- `<blockquote>` is missing the left vertical border and the `<footer>` of a
+  block quote should be muted (see Grid Framework showcases)
+- Grid Framework gallery layout is all messed up
