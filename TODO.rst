@@ -19,5 +19,4 @@ De-bootstrapping progress
 
 The following things still fall apart without Bootstrap:
 
-- `.badge` class for price labels
 - Grid Framework gallery layout is all messed up
