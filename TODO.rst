@@ -16,14 +16,6 @@
 - Write a `template` macro for designing page templates
 
 
-De-bootstrapping progress
-#########################
-
-The following things still fall apart without Bootstrap:
-
-- Grid Framework gallery layout is all messed up
-
-
 Page template macro
 ###################
 
