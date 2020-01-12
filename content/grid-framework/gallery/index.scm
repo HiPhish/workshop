@@ -55,7 +55,10 @@
   `((p
       "Click on one of the thumbnails to see the full image or mouse over for
       the description. The examples shown here are all included with Grid
-      Framework.  Please keep in mind that the  Vectrosity example requires you
+      Framework.  Please keep in mind that the "
+      (a (@ (href "https://starscenesoftware.com/vectrosity.html"))
+        "Vectrosity")
+      " example requires you
       to own a Vectrosity license.")
     (ul (@ (class "gallery thumbnails"))
        ,@(map (λ (gallery-item) (apply gallery-item->sxml gallery-item))
