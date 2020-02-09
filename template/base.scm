@@ -100,10 +100,6 @@ list."
      (meta (@ (name "viewport")
               (content "width=device-width, initial-scale=1")))
      (title ,(if title title "HiPhish's Workshop"))
-     ;; Bootstrap integration
-     (link (@ (rel "stylesheet")
-              (href "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css")
-              (crossorigin "anonymous")))
      ;; My own style sheets
      (link (@ (rel "stylesheet")
               (href "/css/main.css")
