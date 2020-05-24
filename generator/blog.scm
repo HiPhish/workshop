@@ -24,7 +24,9 @@
                 #:select (make-date date-year date-month date-day date->string string->date))
   #:use-module ((reader commonmark) #:select (read-from-commonmark))
   #:use-module ((reader     scheme) #:select (read-from-scheme))
-  #:use-module ((reader     skribe) #:select (read-from-skribe))
+  ; Commented out for the time being because the module (haunt reader skribe)
+  ; cannot be found.
+  ; #:use-module ((reader     skribe) #:select (read-from-skribe))
   #:use-module ((generator)
                 #:select (generate-file))
   #:use-module ((generator verbatim)
