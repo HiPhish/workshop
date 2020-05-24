@@ -140,8 +140,10 @@ necessary."
      (add-post (read-post read-from-commonmark path)))
     ((string=? "scm" extension)
      (add-post (read-post read-from-scheme path)))
-    ((string=? "skr" extension)
-     (add-post (read-post read-from-skribe path)))
+    ; Commented out for the time being because the module (haunt reader skribe)
+    ; cannot be found.
+    ; ((string=? "skr" extension)
+    ;  (add-post (read-post read-from-skribe path)))
     (else
       (let ((out-file (string-append output-dir
                                      (substring path
