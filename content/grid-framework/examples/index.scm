@@ -1,46 +1,42 @@
-#!/usr/bin/guile
-!#
-
 ;; We want to use this module in subsequent examples, so we make it available
 ;; together with a procedure which generates the content for a given example
 ;; page.
 (define-module (content grid-framework examples index)
-  #:export (make-example-page))
+  #:export (example-page))
 
-(define (make-example-page title id description . body)
+(use-modules (component static-page))
+
+
+(define (example-page name id description . body)
   "Build the entire web page for one of the example pages. This function
 generates the metadata and the content, so the module using this only has to
 call this one function."
-  (define metadata
-    `((title    . ,(string-append title " - Grid Framework"))
-      (sub-site . grid-framework)
-      (css      . ("../web-player.css"))
-      (js       . ("/js/unity-webgl.js"))))
-
-  (define content
-    `(;; Assets built by Unity for the HTML5 player
-      (link (@ (href "example.datagz")))
-      (link (@ (href "example.jsgz")))
-      (link (@ (href "example.asm.jsgz")))
-      (link (@ (href "example.memgz")))
-      (p (@ (class "backlink"))
-        (a (@ (href ,(string-append "../#" id)))
-          "Grid Framework examples")
-        " | "
-        (strong ,title))
-      ,description
-      (canvas (@ (id "canvas")
-                 (oncontextmenu "event.preventDefault()")
-                 (height "450")
-                 (width "600"))
-        "")
-      ,@body
-      (script (@ (src "../example.js")
-                 (type "text/javascript"))
-        "")
-      (script (@ (src "UnityLoader.js"))
-        "")))
-  (acons 'content content metadata))
+  (static-page ((title    (string-append name " - Grid Framework"))
+                (sub-site 'grid-framework)
+                (css      '("../web-player.css"))
+                (js       '("/js/unity-webgl.js")))
+    ;; Assets built by Unity for the HTML5 player
+    (link (@ (href "example.datagz")))
+    (link (@ (href "example.jsgz")))
+    (link (@ (href "example.asm.jsgz")))
+    (link (@ (href "example.memgz")))
+    (p (@ (class "backlink"))
+      (a (@ (href ,(string-append "../#" id)))
+        "Grid Framework examples")
+      " | "
+      (strong ,name))
+    ,description
+    (canvas (@ (id "canvas")
+               (oncontextmenu "event.preventDefault()")
+               (height "450")
+               (width "600"))
+      "")
+    (,@body)
+    (script (@ (src "../example.js")
+               (type "text/javascript"))
+      "")
+    (script (@ (src "UnityLoader.js"))
+      "")))
 
 (define (example->sxml title url video content)
   "Build a list of SXML expressions of an example to splice into the content
@@ -153,27 +149,24 @@ tree."
     ((p "Having some fun with Vectrosity and laser lines. The grids can move
         around or even change their properties at runtime."))))
 
-(define content
-  `((p "To help you get started Grid Framework comes with several examples
+(static-page ((title    "Examples - Grid Framework")
+              (sub-site 'grid-framework)
+              (css '("../grid-framework.css" "examples.css")))
+  (p "To help you get started Grid Framework comes with several examples
       showing you how to implement from scratch features commonly found in
       games, such as moving along a grid, using the grid for game logic like in
       a puzzle game, assembling a level or even extending Grid Framework with
       your own methods without touching the source code of Grid Framework
       itself.")
-    (p "The source code has comments explaining the idea behind almost every line
-       of code. I also have tutorial videos where I build those examples from
-       scratch and explain the idea behind the code, for those of you who prefer
-       learning by doing rather than having the source code served to them in
-       one go.")
-    (p "Click a title to get to a playable build, or watch a video of me coding
-       the example live. These videos were recorded at different points in Grid
-       Frameworks development and the interface and usability may appear more
-       crude than it currently is. If the example doesn't load right away
-       please be patient.")
-    (hr)
-    ,@(map example->sxml example-titles example-urls example-videos examples)))
-
-`((content  . ,content)
-  (title    . "Examples - Grid Framework")
-  (sub-site . grid-framework)
-  (css      . ("../grid-framework.css" "examples.css")))
+  (p "The source code has comments explaining the idea behind almost every line
+     of code. I also have tutorial videos where I build those examples from
+     scratch and explain the idea behind the code, for those of you who prefer
+     learning by doing rather than having the source code served to them in
+     one go.")
+  (p "Click a title to get to a playable build, or watch a video of me coding
+     the example live. These videos were recorded at different points in Grid
+     Frameworks development and the interface and usability may appear more
+     crude than it currently is. If the example doesn't load right away
+     please be patient.")
+  (hr)
+  (,@(map example->sxml example-titles example-urls example-videos examples)))

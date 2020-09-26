@@ -3,7 +3,7 @@
 
 (use-modules (content grid-framework examples index))
 
-(make-example-page
+(example-page
   "Seemingly Endless Grid"
   "endless"
   '(p "Use arrow keys to scroll the camera, hold shift to scroll faster. The

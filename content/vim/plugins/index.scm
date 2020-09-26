@@ -1,9 +1,4 @@
-#!/usr/bin/guile
-!#
-
-(define metadata
-  '((title . "Vim plugins - HiPhish's Workshop")
-    (css . ("extra.css"))))
+(use-modules (component static-page))
 
 (define-syntax-rule
   (vim-plugins->sxml
@@ -112,20 +107,18 @@
   `((dt (a (@ (href ,url)) ,name))
     (dd ,@description)))
 
-(define content
-  `((h1 "Plugins for Vim and Neovim")
-    (p "Neovim is my main text editor and over the years I have written a
-       number of plugins, both for Vim and Neovim.")
-    (h2 "Vim and Neovim")
-    (p "The following plugins will work for both Vim and Neovim. If they don't
-       that's considered a bug.")
-    (dl
-      ,@vim-plugins)
-    (h2 "Neovim only")
-    (p "These plugins only work on Neovim. If anyone wants to submit a patch to
-       make them work for Vim as well be my guest.")
-    (dl
-      ,@nvim-plugins)
-    ))
-
-(acons 'content content metadata)
+(static-page ((title "Vim plugins - HiPhish's Workshop")
+              (css   '("extra.css")))
+  (h1 "Plugins for Vim and Neovim")
+  (p "Neovim is my main text editor and over the years I have written a
+     number of plugins, both for Vim and Neovim.")
+  (h2 "Vim and Neovim")
+  (p "The following plugins will work for both Vim and Neovim. If they don't
+     that's considered a bug.")
+  (dl
+    ,@vim-plugins)
+  (h2 "Neovim only")
+  (p "These plugins only work on Neovim. If anyone wants to submit a patch to
+     make them work for Vim as well be my guest.")
+  (dl
+    ,@nvim-plugins))

@@ -1,12 +1,6 @@
-#!/usr/bin/guile
-!#
-
 (use-modules
+  (component static-page)
   ((ice-9 match) #:select (match)))
-
-(define metadata
-  '((title . "HiPhish's Workshop - Home")
-    (css   . ("index.css"))))
 
 (define (product->sxml product)
   (match product
@@ -95,18 +89,17 @@
          " games. The idea is to write a library that can be used as a basis for
          a modern source port."))))))
 
-(define content
-  `((div (@ (class "billboard"))
-      (h1 "Welcome to the workshop")
-      (p "I make things, usually with software, and occasionally I write, usually
-          about software as well. The workshop is home to my projects, both
-          commercial and free, and I invite you to browse my projects and my
-          open source codes.")
-      (p "I also contribute to free libre open source projects when there is an
-          opportunity, so check out those projects as well."))
-    (article (@ (role "main"))
-      (section (@ (id "products"))
-        (h2 "Products made at the workshop")
-        ,@(map product->sxml products)))))
-
-(acons 'content content metadata)
+(static-page ((title "HiPhish's Workshop - Home")
+              (css   '("index.css")))
+  (div (@ (class "billboard"))
+    (h1 "Welcome to the workshop")
+    (p "I make things, usually with software, and occasionally I write, usually
+        about software as well. The workshop is home to my projects, both
+        commercial and free, and I invite you to browse my projects and my
+        open source codes.")
+    (p "I also contribute to free libre open source projects when there is an
+        opportunity, so check out those projects as well."))
+  (article (@ (role "main"))
+    (section (@ (id "products"))
+      (h2 "Products made at the workshop")
+      ,@(map product->sxml products))))

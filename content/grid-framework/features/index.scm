@@ -1,10 +1,4 @@
-#!/usr/bin/guile
-!#
-
-(define metadata
-  '((title    . "Features - Grid Framework") 
-    (sub-site . grid-framework)
-    (css      . ("features.css"))))
+(use-modules (component static-page))
 
 (define features
   ;; A list of features. Each entry is a list of two feature-lists.
@@ -175,12 +169,11 @@
              ,@rest))
          '())))
 
-(define content
-  `((div (@ (id "features"))
-      ,@(map (λ (feature) (apply feature->sxml feature)) features))
-    (script (@ (src "features.js"))
-      "")))
-
-(acons 'content content
-       (acons 'js '("https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
-              metadata))
+(static-page ((title    "Features - Grid Framework") 
+              (sub-site 'grid-framework)
+              (css      '("features.css"))
+              (js       '("https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")))
+  (div (@ (id "features"))
+    ,@(map (λ (feature) (apply feature->sxml feature)) features))
+  (script (@ (src "features.js"))
+    ""))

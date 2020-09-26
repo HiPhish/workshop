@@ -3,7 +3,7 @@
 
 (use-modules (content grid-framework examples index))
 
-(make-example-page
+(example-page
   "Moving along a grid"
   "movement"
   '(p

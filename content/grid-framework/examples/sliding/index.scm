@@ -3,7 +3,7 @@
 
 (use-modules (content grid-framework examples index))
 
-(make-example-page
+(example-page
   "Sliding puzzle"
   "sliding"
   '(p "Unit's built-in physics system is great for 3D games with realistic

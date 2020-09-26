@@ -3,7 +3,7 @@
 
 (use-modules (content grid-framework examples index))
 
-(make-example-page
+(example-page
   "Terrain mesh generation"
   "terrain"
   '(p "Left-click a vertex to raise it, right click to lower it. The text field

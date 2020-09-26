@@ -1,5 +1,4 @@
-#!/usr/bin/guile
-!#
+(use-modules (component static-page))
 
 (define metadata
   '((title    . "FAQ - Grid Framwork")
@@ -207,20 +206,18 @@
         (code "Update()")
         " method."))))
 
-(define content
-  `((p "Do you have a question before buying? Check here to see if someone had
+(static-page ((title    "FAQ - Grid Framwork")
+              (sub-site 'grid-framework)
+              (js       '("https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"))
+              (css      '("faq.css")))
+  (p "Do you have a question before buying? Check here to see if someone had
        the same question before you. If you don't find what you were looking
        for just ask, the more people ask the same thing, the more likely I am
        to add your question to the list as well.")
-    (hr)
-    (div (@ (class "faq-toc"))
-      (ul
-        ,@(map question->sxml ids questions)))
-    ,@(map answer->sxml ids questions answers)
-    (script (@ (src "faq.js"))
-      "")))
-
-(acons 'content content
-       (acons 'css '("faq.css")
-              (acons 'js '("https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
-                     metadata)))
+  (hr)
+  (div (@ (class "faq-toc"))
+    (ul
+      ,@(map question->sxml ids questions)))
+  (,@(map answer->sxml ids questions answers))
+  (script (@ (src "faq.js"))
+    ""))

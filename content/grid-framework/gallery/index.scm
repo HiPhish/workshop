@@ -1,10 +1,4 @@
-#!/usr/bin/guile
-!#
-
-(define metadata
-  '((title    . "Gallery - Grid Framework")
-    (sub-site . grid-framework)
-    (css      . ("gallery.css" "/css/magnific-popup.css" "/css/magnific-popup-custom.css"))))
+(use-modules (component static-page))
 
 (define (gallery-item->sxml img caption alt)
   `(li
@@ -51,43 +45,47 @@
      "Users of Vectrosity can have the lines of renderer generate with one method call"
      "Vectrosity support")))
 
-(define content
-  `((p
-      "Click on one of the thumbnails to see the full image or mouse over for
-      the description. The examples shown here are all included with Grid
-      Framework.  Please keep in mind that the "
-      (a (@ (href "https://starscenesoftware.com/vectrosity.html"))
-        "Vectrosity")
-      " example requires you
-      to own a Vectrosity license.")
-    (ul (@ (class "gallery thumbnails"))
-       ,@(map (λ (gallery-item) (apply gallery-item->sxml gallery-item))
-              gallery-items))
-    (script (@ (type "text/javascript")
-               (src "/js/jquery.magnific-popup.js")
-               (charset "utf-8"))
-      "")
-    (script (@ (type "text/javascript"))
-      "$(document).ready(function() {
-           $('.gallery').magnificPopup({
-             delegate: 'a',
-             type: 'image',
-             key: 'screenshots',
-             mainClass: 'mfp-with-zoom',
-             gallery: {
-               enabled:true,
-             },
-             zoom: {
-               enabled: true,
-               duration: 200,
-               easing: 'ease-in-out',
-               opener: function(openerElement) {
-                 return openerElement.is('img') ? openerElement : openerElement.find('img');
-               }
-             }
-           });
-         })")))
+(define script
+  "$(document).ready(function() {
+       $('.gallery').magnificPopup({
+         delegate: 'a',
+         type: 'image',
+         key: 'screenshots',
+         mainClass: 'mfp-with-zoom',
+         gallery: {
+           enabled:true,
+         },
+         zoom: {
+           enabled: true,
+           duration: 200,
+           easing: 'ease-in-out',
+           opener: function(openerElement) {
+             return openerElement.is('img') ? openerElement : openerElement.find('img');
+           }
+         }
+       });
+     })")
 
-(acons 'content content
-       (acons 'js '("https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
-              metadata))
+(static-page ((title    "Gallery - Grid Framework")
+              (sub-site 'grid-framework)
+              (css      '("gallery.css"
+                          "/css/magnific-popup.css"
+                          "/css/magnific-popup-custom.css"))
+              (js       '("https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")))
+  (p
+    "Click on one of the thumbnails to see the full image or mouse over for
+    the description. The examples shown here are all included with Grid
+    Framework.  Please keep in mind that the "
+    (a (@ (href "https://starscenesoftware.com/vectrosity.html"))
+      "Vectrosity")
+    " example requires you
+    to own a Vectrosity license.")
+  (ul (@ (class "gallery thumbnails"))
+     ,@(map (λ (gallery-item) (apply gallery-item->sxml gallery-item))
+            gallery-items))
+  (script (@ (type "text/javascript")
+             (src "/js/jquery.magnific-popup.js")
+             (charset "utf-8"))
+    "")
+  (script (@ (type "text/javascript"))
+    ,script))

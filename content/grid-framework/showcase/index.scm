@@ -1,10 +1,4 @@
-#!/usr/bin/guile
-!#
-
-(define metadata
-  '((title    . "Showcase - Grid Framework")
-    (sub-site . grid-framework)
-    (css      . ("showcase.css" "/css/magnific-popup.css" "/css/magnific-popup-custom.css"))))
+(use-modules (component static-page))
 
 (define (showcase->sxml title url img description author)
   "Build up an SXML tree of a showcased game's description."
@@ -50,52 +44,51 @@ to your actions.  I use the Grid Framework to layout the levels, do runtime
 positional snapping, and use the Vectrosity support to overlay the visible grid
 guides."))
 
-(define content
-  `((h1 "Made using Grid Framework")
-    (p
-      "Take a look at what existing customers think of Grid Framework and what
-       they used it for to give you an idea of the different ways to employ
-       Grid Framework.")
-    (hr)
-    ,@(map showcase->sxml titles urls imgs descriptions authors)
-    (hr)
-    (p
-      "If you want your own game featured on this page drop me a line with a few
-       sentences describing your game and how Grid Framework helped you during
-       development.")
-    (p
-      (em "General disclaimer:")
-      " The author of Grid Framework is only associated with the authors of the
-       games displayed on this page through Grid Framework. Games are chosen
-       arbitrarily based on their suitability to demonstrate the diverse
-       applications of use; the inclusion of a game is neither an endorsement,
-       nor is the exclusion of a game a condemnation.")
-    ;; Script required for Magnific Popup
-    (script (@ (src "/js/jquery.magnific-popup.js")
-               (type "text/javascript")
-               (charset "utf-8"))
-      "")
-    (script (@ (type "text/javascript"))
-      "$(document).ready(function() {
-        $('.showcase-pic').magnificPopup({
-          delegate: 'a',
-          type: 'image',
-          mainClass: 'mfp-with-zoom',
-          key: 'showcase',
-          gallery: {
-            enabled:true,
-          },
-          zoom: {
-            enabled: true,
-            duration: 200,
-            easing: 'ease-in-out',
-            opener: function(openerElement) {
-              return openerElement.is('img') ? openerElement : openerElement.find('img');
-            }
+(static-page ((title    "Showcase - Grid Framework")
+              (sub-site 'grid-framework)
+              (css      '("showcase.css" "/css/magnific-popup.css" "/css/magnific-popup-custom.css"))
+              (js       '("https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")))
+  (h1 "Made using Grid Framework")
+  (p
+    "Take a look at what existing customers think of Grid Framework and what
+     they used it for to give you an idea of the different ways to employ
+     Grid Framework.")
+  (hr)
+  (,@(map showcase->sxml titles urls imgs descriptions authors))
+  (hr)
+  (p
+    "If you want your own game featured on this page drop me a line with a few
+     sentences describing your game and how Grid Framework helped you during
+     development.")
+  (p
+    (em "General disclaimer:")
+    " The author of Grid Framework is only associated with the authors of the
+     games displayed on this page through Grid Framework. Games are chosen
+     arbitrarily based on their suitability to demonstrate the diverse
+     applications of use; the inclusion of a game is neither an endorsement,
+     nor is the exclusion of a game a condemnation.")
+  ;; Script required for Magnific Popup
+  (script (@ (src "/js/jquery.magnific-popup.js")
+             (type "text/javascript")
+             (charset "utf-8"))
+    "")
+  (script (@ (type "text/javascript"))
+    "$(document).ready(function() {
+      $('.showcase-pic').magnificPopup({
+        delegate: 'a',
+        type: 'image',
+        mainClass: 'mfp-with-zoom',
+        key: 'showcase',
+        gallery: {
+          enabled:true,
+        },
+        zoom: {
+          enabled: true,
+          duration: 200,
+          easing: 'ease-in-out',
+          opener: function(openerElement) {
+            return openerElement.is('img') ? openerElement : openerElement.find('img');
           }
-        });
-      })")))
-
-(acons 'content content
-       (acons 'js '("https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
-              metadata))
+        }
+      });
+    })"))

@@ -3,7 +3,7 @@
 
 (use-modules (content grid-framework examples index))
 
-(make-example-page
+(example-page
   "Lights Out"
   "lights"
   '(p "Click a tile and all adjacent tiles swap their colour, the player's goal

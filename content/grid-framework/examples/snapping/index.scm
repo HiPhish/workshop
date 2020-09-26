@@ -3,7 +3,7 @@
 
 (use-modules (content grid-framework examples index))
 
-(make-example-page
+(example-page
   "Runtime snapping"
   "snapping"
   '(p "Click and drag a block over the grid and observe how it snaps to the

@@ -1,5 +1,4 @@
-#!/usr/bin/guile
-!#
+(use-modules (component static-page))
 
 (define (js-entry->sxml name license my-url original-url license-url)
   "Build up an SXML table entry from information about a JavaScript source
@@ -49,14 +48,9 @@ file."
      "/js/navbar.js"
      "http://www.jclark.com/xml/copying.txt")))
 
-(define metadata
-  '((title . "HiPhish's Workshop - Javascript")))
-
-(define content
-  `((p
-      "The following is a list of all JavaScript scripts employed on this page.")
-    (table (@ (class "table")
-              (id    "jslicense-labels1"))
-      ,@(map (λ (js-entry) (apply js-entry->sxml js-entry)) javascript))))
-
-(acons 'content content metadata)
+(static-page ((title "HiPhish's Workshop - Javascript"))
+  (p
+    "The following is a list of all JavaScript scripts employed on this page.")
+  (table (@ (class "table")
+            (id    "jslicense-labels1"))
+    ,@(map (λ (js-entry) (apply js-entry->sxml js-entry)) javascript)))
