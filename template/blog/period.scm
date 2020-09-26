@@ -16,41 +16,38 @@
 ;;; along with The Workshop.  If not, see <https://www.gnu.org/licenses/>.
 
 (define-module (template blog period)
+  #:use-module (component template)
   #:use-module ((template blog article-index)
                 #:select (articles-list))
   #:export (period))
 
-(define (period data)
-  "Template for a period archive for a given period (year or month). For any
-period the preceding periods must be also give, i.e. if we want to generate a
-monthly archive we also need the year of the month. On the other hand, a yearly
-archive does not need a month, it will list the posts for all months.
+;;; Template for a period archive for a given period (year or month). For any
+;;; period the preceding periods must be also give, i.e. if we want to generate
+;;; a monthly archive we also need the year of the month. On the other hand, a
+;;; yearly archive does not need a month, it will list the posts for all
+;;; months.
+;;; 
+;;; Required metadata:
+;;; 
+;;;   - blog   Information about the blog (will be propagated up)
+;;;   - posts  The list of posts to display
+;;;   - year   Topmost period (integer)
+;;;   
+;;; More lesser periods (e.g. the month) can be given, but they are optional.
 
-Required metadata:
-
-  - blog   Information about the blog (will be propagated up)
-  - posts  The list of posts to display
-  - year   Topmost period (integer)
-  
-More lesser periods (e.g. the month) can be given, but they are optional."
-  (define blog     (assq-ref data 'blog ))
-  (define year     (assq-ref data 'year ))
-  (define month    (assq-ref data 'month))
-  (define posts    (assq-ref data 'posts))
-
-  (define breadcrumbs
-    (cond
-      (month `(((title . ,(assq-ref blog 'top))
-                (url   . "../../"))
-               ((title . ,year)
-                (url   . "../"))
-               ((title . ,(format #f "~2,'0d" month)))))
-      (else `(((title . ,(assq-ref blog 'top))
-               (url   . "../"))
-              ((title . ,year))))))
-  (define content
-    (articles-list posts (if month "../../" "../")))
-
-  (append `((breadcrumbs . ,breadcrumbs)
-            (content     . ,content))
-          data))
+(define period
+  (template (blog year month posts)
+    (breadcrumbs
+      (cond
+        (month `(((title . ,(assq-ref blog 'top))
+                  (url   . "../../"))
+                 ((title . ,year)
+                  (url   . "../"))
+                 ((title . ,(format #f "~2,'0d" month)))))
+        (else `(((title . ,(assq-ref blog 'top))
+                 (url   . "../"))
+                ((title . ,year))))))
+    (content
+      (articles-list posts (if month
+                             "../../"
+                             "../")))))

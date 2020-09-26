@@ -17,24 +17,18 @@
 
 
 (define-module (template blog category)
+  #:use-module (component template)
   #:use-module ((template blog article-index)
                 #:select (articles-list))
   #:export (category))
 
-(define (category data)
-  "Template for the index of a given category"
-  (define blog     (assq-ref data 'blog    ))
-  (define category (assq-ref data 'category))
-  (define posts    (assq-ref data 'posts))
-  (define page     (assq-ref data 'page))
-
-  (define breadcrumbs
-    `(((title . ,(assq-ref blog 'top))
-       (url   . "../../"))
-      ((title . "categories")
-       (url   . "../"))
-      ((title . ,(assq-ref category 'title)))))
-  (define content (articles-list posts (if (= page 1) "../../" "../../../")))
-  (define metadata `((breadcrumbs . ,breadcrumbs)
-                     (content     . ,content)))
-  (append metadata data))
+(define category
+  (template (blog category posts page)
+    (breadcrumbs
+      `(((title . ,(assq-ref blog 'top))
+         (url   . "../../"))
+        ((title . "categories")
+         (url   . "../"))
+        ((title . ,(assq-ref category 'title)))))
+    (content
+      (articles-list posts (if (= page 1) "../../" "../../../")))))

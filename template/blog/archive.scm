@@ -17,32 +17,21 @@
 
 
 (define-module (template blog archive)
+  #:use-module (component template)
   #:export (archive))
 
-(define (archive data)
-  "The global archive which lists all post in chronological order, but without
-preview.
-
-Required metadata.
-
-  - blog     Information about the blog itself
-  - periods  Association tree of all periods"
-  (define blog    (assq-ref data 'blog   ))
-  (define periods (assq-ref data 'periods))
-
-  (define breadcrumbs
-    `(((title . ,(assq-ref blog 'top))
-       (url   . "../"))
-      ((title . "archive"))))
-
-  (define content
-    `((main (@ (id "archive"))
-        (ul
-          ,@(reverse! (map year->sxml periods))))))
-
-  (append `((breadcrumbs . ,breadcrumbs)
-            (content     . ,content))
-          data))
+;;; The global archive which lists all post in chronological order, but without
+;;; preview.
+(define archive
+  (template (blog periods)
+    (breadcrumbs
+      `(((title . ,(assq-ref blog 'top))
+         (url   . "../"))
+        ((title . "archive"))))
+    (content
+      `((main (@ (id "archive"))
+          (ul
+            ,@(reverse! (map year->sxml periods))))))))
 
 (define (year->sxml year)
   `(li

@@ -17,31 +17,29 @@
 
 
 (define-module (template blog categories)
+  #:use-module (component template)
   #:export (categories))
 
-(define (categories data)
-  "Concrete template for all categories in the blog. Does not generate any
-actual content, only sets up the metadata for the next step in the pipeline.
-
-Required metadata:
-  - blog        Information about the blog
-  - categories  List of association list of categories"
-
-  (define blog       (assq-ref data 'blog))
-  (define categories (assq-ref data 'categories))
-
-  (define breadcrumbs
-    `(((title . ,(assq-ref blog 'top))
-       (url   . "../"))
-      ((title . "categories"))))
-  (define content
-    `((ul
-        ,@(map category->sxml categories))))
-  (define metadata `((content     . ,content)
-                     (title       . "Categories")
-                     (url         . "categories")
-                     (breadcrumbs . ,breadcrumbs)))
-  (append metadata data))
+;;; Concrete template for all categories in the blog. Does not generate any
+;;; actual content, only sets up the metadata for the next step in the
+;;; pipeline.
+;;;
+;;; Required metadata:
+;;;   - blog        Information about the blog
+;;;   - categories  List of association list of categories
+(define categories
+  (template (blog categories)
+    (title
+      "Categories")
+    (url
+      "categories")
+    (breadcrumbs
+      `(((title . ,(assq-ref blog 'top))
+         (url   . "../"))
+        ((title . "categories"))))
+    (content
+      `((ul
+          ,@(map category->sxml categories))))))
 
 (define (category->sxml category)
   (define title (assq-ref category 'title))

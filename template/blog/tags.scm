@@ -17,31 +17,29 @@
 
 
 (define-module (template blog tags)
+  #:use-module (component template)
   #:export (tags))
 
-(define (tags data)
-  "Template for all tags in the blog. Does not generate any actual content,
-only sets up the metadata for the next step in the pipeline.
+;;; Template for all tags in the blog. Does not generate any actual content,
+;;; only sets up the metadata for the next step in the pipeline.
+;;; 
+;;; Required metadata:
+;;;   - blog  Information about the blog
+;;;   - tags  List of association list of tags
 
-Required metadata:
-  - blog  Information about the blog
-  - tags  List of association list of tags"
-
-  (define blog       (assq-ref data 'blog))
-  (define tags (assq-ref data 'tags))
-
-  (define breadcrumbs
-    `(((title . ,(assq-ref blog 'top))
-       (url   . "../"))
-      ((title . "tags"))))
-  (define content
-    `((ul
-        ,@(map tag->sxml tags))))
-  (define metadata `((content     . ,content)
-                     (breadcrumbs . ,breadcrumbs)
-                     (title       . "Tags")
-                     (url         . "tags")))
-  (append metadata data))
+(define tags
+  (template (blog tags)
+    (title
+      "Tags")
+    (url
+      "tags")
+    (breadcrumbs
+      `(((title . ,(assq-ref blog 'top))
+         (url   . "../"))
+        ((title . "tags"))))
+    (content
+      `((ul
+          ,@(map tag->sxml tags))))))
 
 (define (tag->sxml tag)
   (define title (assq-ref tag 'title))

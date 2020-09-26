@@ -17,31 +17,26 @@
 
 
 (define-module (template blog tag)
+  #:use-module (component template)
   #:use-module ((template blog article-index)
                 #:select (articles-list))
   #:export (tag))
 
-(define (tag data)
-  "Template for one page of the index of a given tag. Required metadata:
-  
-  - blog   Information about the blog itself
-  - tag    The current tag entry
-  - posts  List of posts to display on the current page of the index"
+;;; Template for one page of the index of a given tag. Required metadata:
+;;;
+;;;   - blog   Information about the blog itself
+;;;   - tag    The current tag entry
+;;;   - posts  List of posts to display on the current page of the index
 
-  (define blog  (assq-ref data 'blog ))
-  (define tag   (assq-ref data 'tag  ))
-  (define posts (assq-ref data 'posts))
-  (define page  (assq-ref data 'page ))
-
-  (define breadcrumbs
-    `(((title . ,(assq-ref blog 'top))
-       (url   . "../../"))
-      ((title . "tags")
-       (url   . "../"))
-      ((title . ,(assq-ref tag 'title)))))
-
-  (define content (articles-list posts (if (= page 1) "../../" "../../../")))
-
-  (define metadata `((breadcrumbs . ,breadcrumbs)
-                     (content     . ,content)))
-  (append metadata data))
+(define tag
+  (template (blog tag posts page)
+    (breadcrumbs
+      `(((title . ,(assq-ref blog 'top))
+         (url   . "../../"))
+        ((title . "tags")
+         (url   . "../"))
+        ((title . ,(assq-ref tag 'title)))))
+    (content
+      (articles-list posts (if (= page 1)
+                             "../../"
+                             "../../../")))))

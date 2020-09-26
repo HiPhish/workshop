@@ -17,6 +17,7 @@
 
 
 (define-module (template base)
+  #:use-module (component template)
   #:export (base-page)
   #:use-module ((srfi srfi-19)
                 #:select (current-date date-year)))
@@ -24,73 +25,62 @@
 ;;; The base template is the final step in content production, it wraps
 ;;; everything in the markup used on the entire page.
 
-(define (base-page data)
-  "Build a complete page, ready for rendering as HTML. The content is a list of
-SXML expressions which will be spliced in. The metadata is an association
-list."
-  (define site-name (assq-ref data 'site-name))
-  (define title     (assq-ref data 'title    ))
-  (define menu-bar  (assq-ref data 'menu-bar ))
-  (define css       (assq-ref data 'css      ))
-  (define js        (assq-ref data 'js       ))
-  (define style     (assq-ref data 'style    ))
-  (define footer    (assq-ref data 'footer   ))
-  (define lang      (assq-ref data 'lang     ))
-  (define content   (assq-ref data 'content  ))
-
-  (define new-content
-    `(html (@ (lang ,lang))
-       ,(head-snippet #:title title #:css css #:style style #:js js)
-       (body
-         (header
-           ;; Top navigation bar
-           ,(main-navbar site-name menu-bar))
-         (div
-           ;; -- insert sub-navigation here ---
-           ,@content)
-         ;; Footer of the website
-         (footer
-           (div  ; This is a wrapper to limit the width
-             (div (@ (class "footer-self"))
-               ,(let ((logo (assq-ref footer 'logo)))
-                  (if (not logo)
-                    ""
-                    (let ((title (assq-ref logo 'title))
-                          (image (assq-ref logo 'image))
-                          (url   (assq-ref logo   'url)))
-                      `(a (@ (href ,url)
-                             (title ,title))
-                         (img (@ (src ,image)
-                                 (title ,title)
-                                 (height "55")))))))
-               ,(let ((copyright (assq-ref footer 'copyright)))
-                  (if (not copyright)
-                    ""
-                    (let ((note  (assq-ref copyright  'note))
-                          (title (assq-ref copyright 'title))
-                          (image (assq-ref copyright 'image))
-                          (url   (assq-ref copyright   'url)))
-                      `(p
-                         ,(if image
-                            `(a (@ (href ,url))
-                               (img (@ (class "copyright-image")
-                                       (src ,image)
-                                       (alt ,title)))
-                               " ")
-                            "")
-                         ,@note)))))
-             (div (@ (class "footer-social"))
-               ,@(map (λ (item)
-                        `(a (@ (href ,(assq-ref item 'url))
-                               (title ,(assq-ref item 'title))
-                               (target "blank"))
-                           (img (@ (src    ,(assq-ref item 'image))
-                                   (alt    ,(assq-ref item 'title))
-                                   (height "55")))
-                           " "))
-                      (assq-ref footer 'social))))))))
-
-  (acons 'content new-content data))
+;;; Build a complete page, ready for rendering as HTML. The content is a list
+;;; of SXML expressions which will be spliced in. The metadata is an
+;;; association list.
+(define base-page
+  (template (site-name title menu-bar css js style footer lang content)
+    (content
+      `(html (@ (lang ,lang))
+         ,(head-snippet #:title title #:css css #:style style #:js js)
+         (body
+           (header
+             ;; Top navigation bar
+             ,(main-navbar site-name menu-bar))
+           (div
+             ;; -- insert sub-navigation here ---
+             ,@content)
+           ;; Footer of the website
+           (footer
+             (div  ; This is a wrapper to limit the width
+               (div (@ (class "footer-self"))
+                 ,(let ((logo (assq-ref footer 'logo)))
+                    (if (not logo)
+                      ""
+                      (let ((title (assq-ref logo 'title))
+                            (image (assq-ref logo 'image))
+                            (url   (assq-ref logo   'url)))
+                        `(a (@ (href ,url)
+                               (title ,title))
+                           (img (@ (src ,image)
+                                   (title ,title)
+                                   (height "55")))))))
+                 ,(let ((copyright (assq-ref footer 'copyright)))
+                    (if (not copyright)
+                      ""
+                      (let ((note  (assq-ref copyright  'note))
+                            (title (assq-ref copyright 'title))
+                            (image (assq-ref copyright 'image))
+                            (url   (assq-ref copyright   'url)))
+                        `(p
+                           ,(if image
+                              `(a (@ (href ,url))
+                                 (img (@ (class "copyright-image")
+                                         (src ,image)
+                                         (alt ,title)))
+                                 " ")
+                              "")
+                           ,@note)))))
+               (div (@ (class "footer-social"))
+                 ,@(map (λ (item)
+                          `(a (@ (href ,(assq-ref item 'url))
+                                 (title ,(assq-ref item 'title))
+                                 (target "blank"))
+                             (img (@ (src    ,(assq-ref item 'image))
+                                     (alt    ,(assq-ref item 'title))
+                                     (height "55")))
+                             " "))
+                        (assq-ref footer 'social))))))))))
 
 (define* (head-snippet #:key (title #f) (css #f) (style #f) (js #f))
   "Produce the `head` part of the base page. Returns one SXML expression (which

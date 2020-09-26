@@ -17,38 +17,33 @@
 
 
 (define-module (template blog article-index)
+  #:use-module (component template)
   #:use-module ((srfi srfi-19)
                 #:select (date->string))
   #:export (article-index articles-list))
 
-(define (article-index data)
-  "Template for an article index; article indices list articles for a give
-group (e.g. a category). The content is a sequence of articles, usually showing
-their title with a link to the full article, and a preview of the full
-article.
-
-Required metadata:
-
-   - pages    Number of pages in the paginator
-   - page     Number of the current pagination page
-   - content  The content generated from the previous template (list of post
-              previews)"
-  (define pages   (assq-ref data 'pages  ))
-  (define page    (assq-ref data 'page   ))
-  (define content (assq-ref data 'content))
-  
-  (define new-content
-    `((main (@ (class "blogpost-listing"))
-        (ul
-          ,@content))
-      ,(if (> pages 1)
-         `(nav (@ (class "paginator"))
-              (ul 
-                ,@(paginator page pages)))
-         '())
-      ))
-
-  (acons 'content new-content data))
+;;; Template for an article index; article indices list articles for a give
+;;; group (e.g. a category). The content is a sequence of articles, usually
+;;; showing their title with a link to the full article, and a preview of the
+;;; full article.
+;;; 
+;;; Required metadata:
+;;; 
+;;;    - pages    Number of pages in the paginator
+;;;    - page     Number of the current pagination page
+;;;    - content  The content generated from the previous template (list of post
+;;;               previews)
+(define article-index
+  (template (pages page content)
+    (content
+      `((main (@ (class "blogpost-listing"))
+          (ul
+            ,@content))
+        ,(if (> pages 1)
+           `(nav (@ (class "paginator"))
+                (ul 
+                  ,@(paginator page pages)))
+           '())))))
 
 (define (articles-list posts relative-to)
   "Build the items for display in an article index. The result is a list of

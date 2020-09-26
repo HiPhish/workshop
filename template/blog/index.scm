@@ -17,22 +17,22 @@
 
 
 (define-module (template blog index)
+  #:use-module (component template)
   #:use-module ((template blog article-index)
                 #:select (articles-list))
   #:export (index))
 
-(define (index data)
-  "Template for the blog main index, to be spliced into the blog template.
-  
-The main index of the blog is what the user first sees when visiting the blog.
-It displays all articles (paginated of course) from newest to oldest."
+;;; Template for the blog main index, to be spliced into the blog template.
+;;;
+;;; The main index of the blog is what the user first sees when visiting the
+;;; blog.  It displays all articles (paginated of course) from newest to
+;;; oldest.
 
-  (define blog  (assq-ref data 'blog ))
-  (define posts (assq-ref data 'posts))
-  (define page  (assq-ref data 'page ))
-
-  (define breadcrumbs `(((title . ,(assq-ref blog 'top)))))
-  (define content (articles-list posts (if (= page 1) "" "../")))
-
-  (acons 'content content
-         (acons 'breadcrumbs breadcrumbs data)))
+(define index
+  (template (blog posts page)
+    (breadcrumbs
+      `(((title . ,(assq-ref blog 'top)))))
+    (content
+      (articles-list posts (if (= page 1)
+                             ""
+                             "../")))))

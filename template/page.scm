@@ -16,6 +16,7 @@
 ;;; along with The Workshop.  If not, see <https://www.gnu.org/licenses/>.
 
 (define-module (template page)
+  #:use-module (component template)
   #:use-module ((srfi srfi-19)
                 #:select (date->string))
   #:export (page))
@@ -24,35 +25,25 @@
 ;; merged into one.
 
 
-(define (page data)
-  "Base template for all pages, to be spliced into a web page."
-
-  (define title     (assq-ref data 'title    ))
-  (define sub-site  (assq-ref data 'sub-site ))
-  (define sub-sites (assq-ref data 'sub-sites))
-  (define modified  (assq-ref data 'modified ))
-  (define content   (assq-ref data 'content  ))
-
-
-  (define new-content
-    `(,(if sub-site
-         (sub-site-navigation (assq-ref sub-sites sub-site))
-         '())
-      ,@content
-      ,(if modified
-         `(footer
-            (p "Last updated: " (date->string modified "~1")))
-         "")))
-
-  (acons 'content new-content
-         (if (and sub-site title)
-           ;; Set the title of the page if there is a sub-site
-           (acons 'title (string-append title
-                                        "-"
-                                        (assq-ref (assq-ref sub-sites sub-site)
-                                                  'title))
-                  data)
-           data)))
+;;; Base template for all pages, to be spliced into a web page.
+(define page
+  (template (title sub-site sub-sites modified content)
+    (content
+      `(,(if sub-site
+           (sub-site-navigation (assq-ref sub-sites sub-site))
+           '())
+        ,@content
+        ,(if modified
+           `(footer
+              (p "Last updated: " (date->string modified "~1")))
+           "")))
+    (title
+      (if (and sub-site title)
+        (string-append title
+                       "-"
+                       (assq-ref (assq-ref sub-sites sub-site)
+                                 'title))
+        title))))
 
 (define (sub-site-navigation sub-site)
   (define title (assq-ref sub-site 'title))
