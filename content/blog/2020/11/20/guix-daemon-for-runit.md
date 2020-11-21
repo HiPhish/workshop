@@ -58,15 +58,15 @@ when the service is started up, its purpose is to actually run the Guix daemon.
 Create the following directory structure:
 
 ```
-etc
+/etc
 └── sv
     └── guix-daemon
         └── run
 ```
 
-The directory `etc/sv` is where services are defined. The name `guix-daemon` is
-arbitrary, you could call your service whatever you want, but I chose the same
-name used by systemd and Upstart for consistency.
+The directory `/etc/sv` is where services are defined. The name `guix-daemon`
+is arbitrary, you could call your service whatever you want, but I chose the
+same name used by systemd and Upstart for consistency.
 
 The `run` file can be anything, as long as it is executable. A shell script is
 the most logical choice, so that is what I chose.
